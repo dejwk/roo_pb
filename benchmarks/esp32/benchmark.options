@@ -1,0 +1,6 @@
+bench.Telemetry.label max_size:32
+bench.Telemetry.payload max_size:128
+bench.Telemetry.readings max_count:64
+bench.Branch.name max_size:16
+bench.Branch.samples max_count:8
+bench.Tree.branches max_count:4

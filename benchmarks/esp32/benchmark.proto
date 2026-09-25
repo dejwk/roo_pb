@@ -1,0 +1,51 @@
+syntax = "proto3";
+package bench;
+message Sample {
+  uint32 id = 1;
+  sint32 value = 2;
+  fixed64 timestamp = 3;
+}
+message Flat {
+  uint32 id = 1;
+  int32 signed_value = 2;
+  sint64 delta = 3;
+  fixed32 mask = 4;
+  fixed64 timestamp = 5;
+  float temperature = 6;
+  double voltage = 7;
+  bool enabled = 8;
+}
+message Telemetry {
+  uint32 sequence = 1;
+  string label = 2;
+  bytes payload = 3;
+  repeated sint32 readings = 4 [packed = true];
+  oneof state {
+    Sample sample = 5;
+    uint32 error = 6;
+  }
+}
+message Branch {
+  string name = 1;
+  repeated Sample samples = 2;
+}
+message Tree {
+  uint32 sequence = 1;
+  repeated Branch branches = 2;
+}
+message Chain1 { uint32 id = 1; Sample child = 2; }
+message Chain2 { uint32 id = 1; Chain1 child = 2; }
+message Chain3 { uint32 id = 1; Chain2 child = 2; }
+message Chain4 { uint32 id = 1; Chain3 child = 2; }
+message Chain5 { uint32 id = 1; Chain4 child = 2; }
+message Chain6 { uint32 id = 1; Chain5 child = 2; }
+message Chain7 { uint32 id = 1; Chain6 child = 2; }
+message Chain8 { uint32 id = 1; Chain7 child = 2; }
+message Chain9 { uint32 id = 1; Chain8 child = 2; }
+message Chain10 { uint32 id = 1; Chain9 child = 2; }
+message Chain11 { uint32 id = 1; Chain10 child = 2; }
+message Chain12 { uint32 id = 1; Chain11 child = 2; }
+message Chain13 { uint32 id = 1; Chain12 child = 2; }
+message Chain14 { uint32 id = 1; Chain13 child = 2; }
+message Chain15 { uint32 id = 1; Chain14 child = 2; }
+message Chain16 { uint32 id = 1; Chain15 child = 2; }

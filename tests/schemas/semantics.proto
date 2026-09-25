@@ -1,0 +1,66 @@
+syntax = "proto2";
+package test;
+
+enum State { UNKNOWN = 0; READY = 1; }
+message Required {
+  required int32 x = 1;
+  required int32 y = 2;
+}
+message Legacy {
+  optional int32 count = 1 [default = -7];
+  optional string label = 2 [default = "hello"];
+  optional Required child = 3;
+  optional State state = 4 [default = READY];
+  repeated State states = 5 [packed = true];
+  extensions 100 to 200;
+}
+extend Legacy { optional int32 extra = 100; }
+
+message Scalars {
+  optional int32 i32 = 1;
+  optional int64 i64 = 2;
+  optional uint32 u32 = 3;
+  optional uint64 u64 = 4;
+  optional sint32 s32 = 5;
+  optional sint64 s64 = 6;
+  optional fixed32 f32 = 7;
+  optional fixed64 f64 = 8;
+  optional sfixed32 sf32 = 9;
+  optional sfixed64 sf64 = 10;
+  optional float real32 = 11;
+  optional double real64 = 12;
+  optional bool flag = 13;
+  optional bytes payload = 14;
+}
+extend Legacy {
+  optional string extra_label = 101 [default = "extension"];
+  repeated sint32 extra_values = 102 [packed = true];
+  optional State extra_state = 103 [default = READY];
+}
+
+message RequiredCallback {
+  required bytes payload = 1;
+}
+
+// A dynamic default makes redundant construction observable via allocations.
+message ResetLeaf {
+  optional string text = 1 [default = "seed"];
+  optional int32 number = 2 [default = -7];
+  optional State state = 3 [default = READY];
+}
+message Reset1 { optional ResetLeaf child = 1; }
+message Reset2 { optional Reset1 child = 1; }
+message Reset3 { optional Reset2 child = 1; }
+message Reset4 { optional Reset3 child = 1; }
+message Reset5 { optional Reset4 child = 1; }
+message Reset6 { optional Reset5 child = 1; }
+message Reset7 { optional Reset6 child = 1; }
+message Reset8 { optional Reset7 child = 1; }
+message Reset9 { optional Reset8 child = 1; }
+message Reset10 { optional Reset9 child = 1; }
+message Reset11 { optional Reset10 child = 1; }
+message Reset12 { optional Reset11 child = 1; }
+message Reset13 { optional Reset12 child = 1; }
+message Reset14 { optional Reset13 child = 1; }
+message Reset15 { optional Reset14 child = 1; }
+message Reset16 { optional Reset15 child = 1; }

@@ -1,0 +1,16 @@
+[fields."test.Legacy.label"]
+max_bytes = 16
+[fields."test.Legacy.states"]
+max_count = 8
+[fields."test.Scalars.payload"]
+max_bytes = 16
+[fields."test.extra_label"]
+max_bytes = 16
+[fields."test.extra_values"]
+max_count = 4
+
+[fields."test.RequiredCallback.payload"]
+storage = "callback"
+
+[fields."test.ResetLeaf.text"]
+storage = "dynamic"

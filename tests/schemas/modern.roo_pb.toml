@@ -1,0 +1,43 @@
+[fields."test.Modern.values"]
+max_count = 8
+[fields."test.Modern.counts"]
+max_count = 2
+[fields."test.Modern.CountsEntry.key"]
+max_bytes = 8
+[fields."test.Modern.note"]
+max_bytes = 8
+[fields."test.Modern.stream"]
+storage = "callback"
+[fields."test.Modern.big"]
+storage = "dynamic"
+[fields."test.Modern.dynamic"]
+storage = "dynamic"
+[fields."test.Modern.narrow"]
+integer_bits = 8
+[fields."test.Modern.token"]
+max_bytes = 4
+fixed_length = true
+[fields."test.Modern.pair"]
+max_count = 2
+fixed_count = true
+
+[fields."test.CallbackHolder.payload"]
+storage = "callback"
+[fields."test.CallbackEnvelope.children"]
+max_count = 2
+
+[fields."test.CallbackChoice.payload"]
+storage = "callback"
+[fields."test.CallbackChoice.other"]
+storage = "callback"
+
+[fields."test.OneofStorage.large"]
+max_bytes = 256
+[fields."test.OneofStorage.small"]
+max_bytes = 192
+[fields."test.OneofStorage.dynamic"]
+storage = "dynamic"
+[fields."test.OneofStorage.label"]
+storage = "dynamic"
+[fields."test.OneofCollection.items"]
+max_count = 2

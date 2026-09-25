@@ -1,0 +1,12 @@
+syntax = "proto2";
+package transfer;
+
+message Packet {
+  optional uint32 id = 1;
+  optional bytes payload = 2;
+  extensions 100 to 199;
+}
+
+extend Packet {
+  optional uint32 checksum = 100;
+}

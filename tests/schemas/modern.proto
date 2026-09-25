@@ -1,0 +1,75 @@
+syntax = "proto3";
+package test;
+import "semantics.proto";
+message Modern {
+  repeated int32 values = 1;
+  map<string, int32> counts = 2;
+  oneof selection {
+    Required child = 3;
+    string note = 4;
+  }
+  bytes stream = 5;
+  repeated uint64 big = 6;
+  string dynamic = 7;
+  optional int32 narrow = 8;
+  bytes token = 9;
+  repeated int32 pair = 10;
+}
+
+// Seventeen presence flags exercise packing across three bytes.
+message Presence {
+  optional bool f0 = 1;
+  optional bool f1 = 2;
+  optional bool f2 = 3;
+  optional bool f3 = 4;
+  optional bool f4 = 5;
+  optional bool f5 = 6;
+  optional bool f6 = 7;
+  optional bool f7 = 8;
+  optional bool f8 = 9;
+  optional bool f9 = 10;
+  optional bool f10 = 11;
+  optional bool f11 = 12;
+  optional bool f12 = 13;
+  optional bool f13 = 14;
+  optional bool f14 = 15;
+  optional bool f15 = 16;
+  optional bool f16 = 17;
+}
+
+message CallbackHolder {
+  optional bytes payload = 1;
+}
+
+message CallbackEnvelope {
+  CallbackHolder child = 1;
+  repeated CallbackHolder children = 2;
+}
+
+message CallbackChoice {
+  oneof selection {
+    bytes payload = 1;
+    uint32 number = 2;
+    bytes other = 3;
+  }
+}
+
+message OneofStorage {
+  oneof value {
+    bytes large = 1;
+    bytes small = 2;
+    Required child = 3;
+    string dynamic = 4;
+    uint64 number = 5;
+    State state = 6;
+  }
+  oneof other {
+    uint32 code = 7;
+    string label = 8;
+  }
+  optional int32 ordinary = 9;
+}
+
+message OneofCollection {
+  repeated OneofStorage items = 1;
+}

@@ -1,0 +1,50 @@
+{
+  "timestamp_utc": "20260926T110711Z",
+  "port": "/dev/ttyUSB0",
+  "runs": 3,
+  "roo_proto_commit": "362c0fbc515cea1a044662b72d8d05664c80eeba",
+  "tracked_diff_sha256": "72822510d90a57f14ecb5f8349e8d0e96e6e59df1acbc10fc22726f6a45d5500",
+  "benchmark_sha256": {
+    "README.md": "3fd6efeb38e64d3b58cc98859eaee0284f4e6a17f91f27c7ef98c7166d333748",
+    "RESET_RESULTS.md": "e879d3d92a6299b044c9b016564aca9835af457b3bf71ba94b27fb49f24be125",
+    "RESULTS.md": "3b56e8fb20db87a48a2c8c938f0eaaa4b4466f42c074daf2a054a6f0463aa5c3",
+    "benchmark.options": "0e08378076903ac5f8c32f39c0f75f8d242b51d162843f49be14f1c1f42f7498",
+    "benchmark.proto": "9f1015507834e08fa6791d383414fbe58792185164dceba946aaf0ab0eecfe8d",
+    "benchmark.roo_proto.toml": "b6d8592fa38d7a81bbb9d8935fd9c0ad4398faf70cf0a7395023808be9d39d58",
+    "build.py": "ca4407b781516b762178eeb7ec74c991077e05e93244fbc41768c8cc75c20035",
+    "build_contract.h": "7b164b28374d522ab1f7da465d105de1b5f0871cf604aaa42fff6362be0e75ff",
+    "check_build.py": "f0e794d9318c4362cb59f2d64499027b10e8a4a2c7ebde5b059e444c264f7e6d",
+    "platformio.ini": "107d71b5d7e205ca5cf21616d62142a763d72163448645928c9436476a530a85",
+    "prepare.py": "676881f37fff10803385ebb357786e555b8331728928ad723f5493459c37e8db",
+    "results/20260926/manifest.json": "e23d43d83075b70a96b461aa67cdb377a02ea777de484985beb43e860ffd9eaf",
+    "results/20260926/nanopb.log": "b41ded8a55c083879f2c5ff745f2d9538b476eb6ed6a22c661781c94069630d1",
+    "results/20260926/results.csv": "8b660fe70b4b1d12d438ca3ba01f085739d548087597acd4ffd2d1ad6148f372",
+    "results/20260926/roo.log": "b7ca20d998e124f60f1c1936ffda7da751e0a64d7a4d30d8fa88c2542e20473d",
+    "results/20260926-reset-fix/manifest.json": "1e4900b07380c4ba80a53865891cc4c0a07520788aa9e7cdefd87d8bad8271e6",
+    "results/20260926-reset-fix/nanopb.log": "a61256861a8c05512ab2792970cd7d05ca96cb24f9c84cbded76a3ada7fe2a96",
+    "results/20260926-reset-fix/results.csv": "a4596637ec6f16a74a92548a75b00828737d272f546b49f28dc777ceef3b994e",
+    "results/20260926-reset-fix/roo.log": "cdbcc20f893b9ec28e769cffe7828698e01277d5b23b77b3244742ce55c6a96d",
+    "run.py": "a3a5ff673a6f6ee757e220987d54b34a83e62f699e860d800371a0ea855f29f0",
+    "src/backend.h": "d7678ff3dc2a4a2b307114b7998255e14a0d0e353d3ba0ee31fba76cc3011b44",
+    "src/main.cpp": "4a07b7acca93f4d52a31184f915cd201061be3547022bb0de2f6f246eae023e9",
+    "validate.py": "a34183ae343e1dd5320de24916bf343d1135b7c1d04e4dc303b843186fc290c2"
+  },
+  "roo_verified_translation_units": 60,
+  "roo_compile_commands_sha256": "591849078285e5821c60d75329ff8d1615446fb4590b36b745c43584d4ff7707",
+  "roo_firmware_sha256": "12799e5f7e19bde76fa8eb512ae41cbd6ff2c0b1124898402347fd075926bae3",
+  "nanopb_verified_translation_units": 62,
+  "nanopb_compile_commands_sha256": "9a5a3e6d1bb7fa4290672c77f8a5793bc2b5f01754ab0af8186bc14266862864",
+  "nanopb_firmware_sha256": "4b977a50099e0b6338105a3782d010d82a536e3d737e7e764a3c85bf36abfee9",
+  "device_metadata": {
+    "roo": [
+      "META,chip=ESP32-D0WD-V3,revision=301,cpu_mhz=240,arduino=3.3.7,idf=v5.5.2-729-g87912cd291,compiler=14.2.0,rounds=9,target_batch_us=40000,core=1,opt=Os,lto=off,buffer_only=1,utf8=1,cplusplus=201703,exceptions=0,rtti=0",
+      "META,chip=ESP32-D0WD-V3,revision=301,cpu_mhz=240,arduino=3.3.7,idf=v5.5.2-729-g87912cd291,compiler=14.2.0,rounds=9,target_batch_us=40000,core=1,opt=Os,lto=off,buffer_only=1,utf8=1,cplusplus=201703,exceptions=0,rtti=0",
+      "META,chip=ESP32-D0WD-V3,revision=301,cpu_mhz=240,arduino=3.3.7,idf=v5.5.2-729-g87912cd291,compiler=14.2.0,rounds=9,target_batch_us=40000,core=1,opt=Os,lto=off,buffer_only=1,utf8=1,cplusplus=201703,exceptions=0,rtti=0"
+    ],
+    "nanopb": [
+      "META,chip=ESP32-D0WD-V3,revision=301,cpu_mhz=240,arduino=3.3.7,idf=v5.5.2-729-g87912cd291,compiler=14.2.0,rounds=9,target_batch_us=40000,core=1,opt=Os,lto=off,buffer_only=1,utf8=1,cplusplus=201703,exceptions=0,rtti=0",
+      "META,chip=ESP32-D0WD-V3,revision=301,cpu_mhz=240,arduino=3.3.7,idf=v5.5.2-729-g87912cd291,compiler=14.2.0,rounds=9,target_batch_us=40000,core=1,opt=Os,lto=off,buffer_only=1,utf8=1,cplusplus=201703,exceptions=0,rtti=0",
+      "META,chip=ESP32-D0WD-V3,revision=301,cpu_mhz=240,arduino=3.3.7,idf=v5.5.2-729-g87912cd291,compiler=14.2.0,rounds=9,target_batch_us=40000,core=1,opt=Os,lto=off,buffer_only=1,utf8=1,cplusplus=201703,exceptions=0,rtti=0"
+    ]
+  }
+}

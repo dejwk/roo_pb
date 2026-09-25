@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "roo-pbc"
+version = "0.1.0"
+description = "Independent Python protocol buffer compiler for roo_pb"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+readme = "README.md"
+dependencies = []
+
+[project.scripts]
+roo-pbc = "roo_pbc.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["compiler"]

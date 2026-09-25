@@ -1,0 +1,205 @@
+Processing roo (platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.37/platform-espressif32.zip; board: esp32dev; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32dev.html
+PLATFORM: Espressif 32 (55.3.37) > Espressif ESP32 Dev Module
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.7 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.87912cd291 
+ - tool-esptoolpy @ 5.1.2 
+ - tool-openocd-esp32 @ 2.1200.20251215 (12.0) 
+ - tool-xtensa-esp-elf-gdb @ 16.3.0+20250913 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 43 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/roo_proto/wire.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/unicode/unicode.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/src/main.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/ColorFormat.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/Esp.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/FirmwareMSC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/FunctionalInterrupt.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/HEXBuilder.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/HWCDC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/HardwareSerial.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/HashBuilder.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/IPAddress.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/MD5Builder.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/MacAddress.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/Print.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/Stream.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/StreamString.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/Tone.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/USB.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/USBCDC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/USBMSC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/WMath.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/WString.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/base64.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/cbuf.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/chip-debug-report.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-adc.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-bt.c.o
+In file included from /home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/esp_bt.h:16,
+                 from /home/dawidk/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-bt.c:30:
+/home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/../../../../controller/esp32/esp_bredr_cfg.h:18:9: note: '#pragma message: BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)'
+   18 | #pragma message ("BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)")
+      |         ^~~~~~~
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-cpu.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-dac.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-gpio.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-hosted.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-i2c-ng.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-i2c-slave.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-i2c.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-ledc.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-log-wrapper.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-matrix.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-misc.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-periman.c.o
+In file included from /home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/esp_bt.h:16,
+                 from /home/dawidk/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-misc.c:29:
+/home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/../../../../controller/esp32/esp_bredr_cfg.h:18:9: note: '#pragma message: BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)'
+   18 | #pragma message ("BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)")
+      |         ^~~~~~~
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-psram.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-rgb-led.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-rmt.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-sigmadelta.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-spi.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-time.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-timer.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-tinyusb.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-touch-ng.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-touch.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/esp32-hal-uart.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/firmware_msc_fat.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/freertos_stats.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/idf_openthread_mpool_wrapper.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/libb64/cdecode.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/libb64/cencode.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/main.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/stdlib_noniso.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/wiring_pulse.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/FrameworkArduino/wiring_shift.c.o
+Archiving /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/libFrameworkArduino.a
+Indexing /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/libFrameworkArduino.a
+Linking /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/firmware.elf
+                            Memory Type Usage Summary                             
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Memory Type/Section ┃ Used [bytes] ┃ Used [%] ┃ Remain [bytes] ┃ Total [bytes] ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Flash Code          │       146848 │          │                │               │
+│    .text            │       146848 │          │                │               │
+│ Flash Data          │        71580 │          │                │               │
+│    .rodata          │        71324 │          │                │               │
+│    .appdesc         │          256 │          │                │               │
+│ IRAM                │        62879 │    47.97 │          68193 │        131072 │
+│    .text            │        61851 │    47.19 │                │               │
+│    .vectors         │         1028 │     0.78 │                │               │
+│ DRAM                │        29753 │    23.88 │          94827 │        124580 │
+│    .data            │        16849 │    13.52 │                │               │
+│    .bss             │        12904 │    10.36 │                │               │
+└─────────────────────┴──────────────┴──────────┴────────────────┴───────────────┘
+Total image size: 298156 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.
+Retrieving maximum program size /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/firmware.elf
+Checking size /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]   9.1% (used 29756 bytes from 327680 bytes)
+Flash: [==        ]  22.7% (used 297900 bytes from 1310720 bytes)
+Building /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/firmware.bin
+esptool v5.1.2
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+Configuring upload protocol...
+AVAILABLE: cmsis-dap, esp-bridge, esp-prog, espota, esptool, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa
+CURRENT: upload_protocol = esptool
+Looking for upload port...
+Uploading /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/roo/firmware.bin
+esptool v5.1.2
+Serial port /dev/ttyUSB0:
+Connecting....
+Connected to ESP32 on /dev/ttyUSB0:
+Chip type:          ESP32-D0WD-V3 (revision v3.1)
+Features:           Wi-Fi, BT, Dual Core + LP Core, 240MHz, Vref calibration in eFuse, Coding Scheme None
+Crystal frequency:  40MHz
+MAC:                a0:b7:65:20:c7:38
+
+Uploading stub flasher...
+Running stub flasher...
+Stub flasher running.
+Changing baud rate to 460800...
+Changed.
+
+Configuring flash size...
+Auto-detected flash size: 4MB
+Flash will be erased from 0x00001000 to 0x00006fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Flash will be erased from 0x0000e000 to 0x0000ffff...
+Flash will be erased from 0x00010000 to 0x00058fff...
+SHA digest in image updated.
+Compressed 23552 bytes to 15145...
+
+Writing at 0x00001000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/15145 bytes... 
+
+Writing at 0x00006c00 [██████████████████████████████] 100.0% 15145/15145 bytes... 
+Wrote 23552 bytes (15145 compressed) at 0x00001000 in 0.6 seconds (293.5 kbit/s).
+Hash of data verified.
+Compressed 3072 bytes to 146...
+
+Writing at 0x00008000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/146 bytes... 
+
+Writing at 0x00008c00 [██████████████████████████████] 100.0% 146/146 bytes... 
+Wrote 3072 bytes (146 compressed) at 0x00008000 in 0.1 seconds (479.0 kbit/s).
+Hash of data verified.
+Compressed 8192 bytes to 47...
+
+Writing at 0x0000e000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/47 bytes... 
+
+Writing at 0x00010000 [██████████████████████████████] 100.0% 47/47 bytes... 
+Wrote 8192 bytes (47 compressed) at 0x0000e000 in 0.1 seconds (654.5 kbit/s).
+Hash of data verified.
+Compressed 298304 bytes to 166037...
+
+Writing at 0x00010000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/166037 bytes... 
+
+Writing at 0x0001be9d [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.9% 16384/166037 bytes... 
+
+Writing at 0x000289ef [█████░░░░░░░░░░░░░░░░░░░░░░░░░]  19.7% 32768/166037 bytes... 
+
+Writing at 0x0002dfd1 [████████░░░░░░░░░░░░░░░░░░░░░░]  29.6% 49152/166037 bytes... 
+
+Writing at 0x00034515 [███████████░░░░░░░░░░░░░░░░░░░]  39.5% 65536/166037 bytes... 
+
+Writing at 0x00039b9c [██████████████░░░░░░░░░░░░░░░░]  49.3% 81920/166037 bytes... 
+
+Writing at 0x0003ef5a [█████████████████░░░░░░░░░░░░░]  59.2% 98304/166037 bytes... 
+
+Writing at 0x0004448e [████████████████████░░░░░░░░░░]  69.1% 114688/166037 bytes... 
+
+Writing at 0x00049e17 [███████████████████████░░░░░░░]  78.9% 131072/166037 bytes... 
+
+Writing at 0x00052612 [██████████████████████████░░░░]  88.8% 147456/166037 bytes... 
+
+Writing at 0x00057dd2 [█████████████████████████████░]  98.7% 163840/166037 bytes... 
+
+Writing at 0x00058d40 [██████████████████████████████] 100.0% 166037/166037 bytes... 
+Wrote 298304 bytes (166037 compressed) at 0x00010000 in 4.3 seconds (560.3 kbit/s).
+Hash of data verified.
+
+Hard resetting via RTS pin...
+========================= [SUCCESS] Took 17.94 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+roo            SUCCESS   00:00:17.942
+========================= 1 succeeded in 00:00:17.942 =========================

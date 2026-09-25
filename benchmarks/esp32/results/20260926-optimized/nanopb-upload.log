@@ -1,0 +1,207 @@
+Processing nanopb (platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.37/platform-espressif32.zip; board: esp32dev; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32dev.html
+PLATFORM: Espressif 32 (55.3.37) > Espressif ESP32 Dev Module
+HARDWARE: ESP32 240MHz, 320KB RAM, 4MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - contrib-piohome @ 3.4.4 
+ - framework-arduinoespressif32 @ 3.3.7 
+ - framework-arduinoespressif32-libs @ 5.5.0+sha.87912cd291 
+ - tool-esptoolpy @ 5.1.2 
+ - tool-openocd-esp32 @ 2.1200.20251215 (12.0) 
+ - tool-xtensa-esp-elf-gdb @ 16.3.0+20250913 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20251107
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 43 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/nanopb_runtime/pb_common.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/nanopb_runtime/pb_decode.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/nanopb_runtime/pb_encode.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/nanopb_schema/benchmark.pb.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/src/main.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/ColorFormat.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/Esp.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/FirmwareMSC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/FunctionalInterrupt.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/HEXBuilder.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/HWCDC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/HardwareSerial.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/HashBuilder.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/IPAddress.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/MD5Builder.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/MacAddress.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/Print.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/Stream.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/StreamString.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/Tone.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/USB.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/USBCDC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/USBMSC.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/WMath.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/WString.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/base64.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/cbuf.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/chip-debug-report.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-adc.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-bt.c.o
+In file included from /home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/esp_bt.h:16,
+                 from /home/dawidk/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-bt.c:30:
+/home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/../../../../controller/esp32/esp_bredr_cfg.h:18:9: note: '#pragma message: BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)'
+   18 | #pragma message ("BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)")
+      |         ^~~~~~~
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-cpu.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-dac.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-gpio.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-hosted.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-i2c-ng.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-i2c-slave.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-i2c.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-ledc.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-log-wrapper.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-matrix.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-misc.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-periman.c.o
+In file included from /home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/esp_bt.h:16,
+                 from /home/dawidk/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-misc.c:29:
+/home/dawidk/.platformio/packages/framework-arduinoespressif32-libs/esp32/include/bt/include/esp32/include/../../../../controller/esp32/esp_bredr_cfg.h:18:9: note: '#pragma message: BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)'
+   18 | #pragma message ("BT: forcing BR/EDR max sync conn eff to 1 (Bluedroid HFP requires SCO/eSCO)")
+      |         ^~~~~~~
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-psram.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-rgb-led.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-rmt.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-sigmadelta.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-spi.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-time.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-timer.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-tinyusb.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-touch-ng.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-touch.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/esp32-hal-uart.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/firmware_msc_fat.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/freertos_stats.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/idf_openthread_mpool_wrapper.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/libb64/cdecode.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/libb64/cencode.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/main.cpp.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/stdlib_noniso.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/wiring_pulse.c.o
+Compiling /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/FrameworkArduino/wiring_shift.c.o
+Archiving /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/libFrameworkArduino.a
+Indexing /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/libFrameworkArduino.a
+Linking /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/firmware.elf
+                            Memory Type Usage Summary                             
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Memory Type/Section ┃ Used [bytes] ┃ Used [%] ┃ Remain [bytes] ┃ Total [bytes] ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Flash Code          │       142164 │          │                │               │
+│    .text            │       142164 │          │                │               │
+│ Flash Data          │        73208 │          │                │               │
+│    .rodata          │        72952 │          │                │               │
+│    .appdesc         │          256 │          │                │               │
+│ IRAM                │        62879 │    47.97 │          68193 │        131072 │
+│    .text            │        61851 │    47.19 │                │               │
+│    .vectors         │         1028 │     0.78 │                │               │
+│ DRAM                │        29049 │    23.32 │          95531 │        124580 │
+│    .data            │        16849 │    13.52 │                │               │
+│    .bss             │        12200 │     9.79 │                │               │
+└─────────────────────┴──────────────┴──────────┴────────────────┴───────────────┘
+Total image size: 295100 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.
+Retrieving maximum program size /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/firmware.elf
+Checking size /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]   8.9% (used 29052 bytes from 327680 bytes)
+Flash: [==        ]  22.5% (used 294844 bytes from 1310720 bytes)
+Building /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/firmware.bin
+esptool v5.1.2
+Creating ESP32 image...
+Merged 2 ELF sections.
+Successfully created ESP32 image.
+Configuring upload protocol...
+AVAILABLE: cmsis-dap, esp-bridge, esp-prog, espota, esptool, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa
+CURRENT: upload_protocol = esptool
+Looking for upload port...
+Uploading /home/dawidk/Documents/Arduino/roo/roo_proto/build/esp32_benchmark/pio/nanopb/firmware.bin
+esptool v5.1.2
+Serial port /dev/ttyUSB0:
+Connecting....
+Connected to ESP32 on /dev/ttyUSB0:
+Chip type:          ESP32-D0WD-V3 (revision v3.1)
+Features:           Wi-Fi, BT, Dual Core + LP Core, 240MHz, Vref calibration in eFuse, Coding Scheme None
+Crystal frequency:  40MHz
+MAC:                a0:b7:65:20:c7:38
+
+Uploading stub flasher...
+Running stub flasher...
+Stub flasher running.
+Changing baud rate to 460800...
+Changed.
+
+Configuring flash size...
+Auto-detected flash size: 4MB
+Flash will be erased from 0x00001000 to 0x00006fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Flash will be erased from 0x0000e000 to 0x0000ffff...
+Flash will be erased from 0x00010000 to 0x00058fff...
+SHA digest in image updated.
+Compressed 23552 bytes to 15145...
+
+Writing at 0x00001000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/15145 bytes... 
+
+Writing at 0x00006c00 [██████████████████████████████] 100.0% 15145/15145 bytes... 
+Wrote 23552 bytes (15145 compressed) at 0x00001000 in 0.6 seconds (293.6 kbit/s).
+Hash of data verified.
+Compressed 3072 bytes to 146...
+
+Writing at 0x00008000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/146 bytes... 
+
+Writing at 0x00008c00 [██████████████████████████████] 100.0% 146/146 bytes... 
+Wrote 3072 bytes (146 compressed) at 0x00008000 in 0.0 seconds (621.4 kbit/s).
+Hash of data verified.
+Compressed 8192 bytes to 47...
+
+Writing at 0x0000e000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/47 bytes... 
+
+Writing at 0x00010000 [██████████████████████████████] 100.0% 47/47 bytes... 
+Wrote 8192 bytes (47 compressed) at 0x0000e000 in 0.1 seconds (816.2 kbit/s).
+Hash of data verified.
+Compressed 295248 bytes to 165137...
+
+Writing at 0x00010000 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% 0/165137 bytes... 
+
+Writing at 0x0001bed4 [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   9.9% 16384/165137 bytes... 
+
+Writing at 0x00028cc9 [█████░░░░░░░░░░░░░░░░░░░░░░░░░]  19.8% 32768/165137 bytes... 
+
+Writing at 0x0002e30a [████████░░░░░░░░░░░░░░░░░░░░░░]  29.8% 49152/165137 bytes... 
+
+Writing at 0x00033e78 [███████████░░░░░░░░░░░░░░░░░░░]  39.7% 65536/165137 bytes... 
+
+Writing at 0x00039398 [██████████████░░░░░░░░░░░░░░░░]  49.6% 81920/165137 bytes... 
+
+Writing at 0x0003e757 [█████████████████░░░░░░░░░░░░░]  59.5% 98304/165137 bytes... 
+
+Writing at 0x00043e4c [████████████████████░░░░░░░░░░]  69.5% 114688/165137 bytes... 
+
+Writing at 0x00049577 [███████████████████████░░░░░░░]  79.4% 131072/165137 bytes... 
+
+Writing at 0x00051e71 [██████████████████████████░░░░]  89.3% 147456/165137 bytes... 
+
+Writing at 0x000578dd [█████████████████████████████░]  99.2% 163840/165137 bytes... 
+
+Writing at 0x00058150 [██████████████████████████████] 100.0% 165137/165137 bytes... 
+Wrote 295248 bytes (165137 compressed) at 0x00010000 in 4.2 seconds (563.6 kbit/s).
+Hash of data verified.
+
+Hard resetting via RTS pin...
+========================= [SUCCESS] Took 16.98 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+nanopb         SUCCESS   00:00:16.979
+========================= 1 succeeded in 00:00:16.979 =========================

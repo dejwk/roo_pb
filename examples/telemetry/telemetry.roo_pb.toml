@@ -1,0 +1,8 @@
+[fields."example.Device.name"]
+max_bytes = 32
+
+[fields."example.Device.readings"]
+max_count = 16
+
+[fields."example.Device.reason"]
+max_bytes = 64

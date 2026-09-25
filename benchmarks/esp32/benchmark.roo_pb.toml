@@ -1,0 +1,12 @@
+[fields."bench.Telemetry.label"]
+max_bytes = 31
+[fields."bench.Telemetry.payload"]
+max_bytes = 128
+[fields."bench.Telemetry.readings"]
+max_count = 64
+[fields."bench.Branch.name"]
+max_bytes = 15
+[fields."bench.Branch.samples"]
+max_count = 8
+[fields."bench.Tree.branches"]
+max_count = 4

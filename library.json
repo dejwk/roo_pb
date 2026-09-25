@@ -1,0 +1,11 @@
+{
+  "name": "roo_pb",
+  "version": "0.1.0",
+  "description": "Lightweight C++17 protocol buffers for byte buffers with roo_io utilities with independent Python generation (requires local roo_io checked primitives)",
+  "license": "MIT",
+  "keywords": ["protobuf", "serialization", "embedded"],
+  "frameworks": ["arduino", "espidf"],
+  "platforms": "*",
+  "build": {"flags": ["-std=gnu++17"]},
+  "dependencies": {"dejwk/roo_io": ">=2.3.1"}
+}

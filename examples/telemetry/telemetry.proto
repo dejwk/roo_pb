@@ -1,0 +1,12 @@
+syntax = "proto3";
+package example;
+
+message Device {
+  uint32 id = 1;
+  optional string name = 2;
+  repeated sint32 readings = 3;
+  oneof state {
+    bool online = 4;
+    string reason = 5;
+  }
+}
