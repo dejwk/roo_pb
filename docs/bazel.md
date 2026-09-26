@@ -88,13 +88,11 @@ script. The standalone compiler normally emits all imported headers; its
 
 ## Module setup
 
-Until roo_pb is published, the consuming root module can use sibling checkouts:
+Add the published module to the consuming root module:
 
 ```starlark
 bazel_dep(name = "roo_pb", version = "0.1.0")
-local_path_override(module_name = "roo_pb", path = "../roo_pb")
 ```
 
-Root-module overrides do not propagate from dependency modules. The published
-roo_io 2.4.0 dependency provides the primitives required by roo_pb; no local
-roo_io override is needed.
+The published roo_io 2.4.0 dependency provides the required binary primitives.
+No local overrides are needed.

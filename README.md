@@ -128,7 +128,7 @@ roo_pb_library(
 Add `:messages` to a C++ target's `deps` and include `"device.pb.h"`. The rule
 supplies generated headers and the runtime, supports imported schemas through
 `deps`, and rebuilds when schemas, sidecars, or compiler sources change.
-See [Bazel protobuf libraries](docs/bazel.md) for paths, imports, and local setup.
+See [Bazel protobuf libraries](docs/bazel.md) for paths, imports, and module setup.
 
 ## Build and test
 
