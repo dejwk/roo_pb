@@ -1,2 +1,4 @@
 BasedOnStyle: Google
-InsertBraces: true
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Left

@@ -1,0 +1,6 @@
+# Generated outputs must not be traversed by recursive target patterns (...).
+build
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-roo_pb
