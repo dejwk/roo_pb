@@ -10,7 +10,7 @@ An optional external Google Python package is used only for interoperability tes
 
 Requires Python 3.11+, a C++17 compiler, and roo_io with its dependencies.
 The runtime uses `roo_io/data/zigzag.h` and `roo_io/text/unicode.h`.
-MODULE.bazel selects the sibling `../roo_io` checkout. Direct C++ builds must
+MODULE.bazel selects the published roo_io 2.4.0 release. Direct C++ builds must
 compile/link `src/roo_pb/wire.cpp` and `roo_io/text/unicode.cpp`.
 
 Generate a schema without installing any Python packages:
@@ -154,7 +154,7 @@ bazel run --config=roo_testing_idf_esp32 //:telemetry_example
 bazel build --config=roo_testing_arduino_esp32 //:arduino_example_compile
 ```
 
-The checked-in `local_path_override` selects `../roo_io`. For a different layout,
+Bazel uses published dependencies by default. To test a local roo_io checkout,
 use `--override_module=roo_io=/path/to/roo_io`; roo_testing can similarly be
 selected with `--override_module=roo_testing=/path/to/roo_testing`.
 Bazel uses the normal persistent output/cache locations and global resource limits.

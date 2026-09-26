@@ -411,6 +411,8 @@
     "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_backport/1.2.4/source.json": "128f769b177b7bc2731d41516d236dfbd286db52f27a2c758fd4ecff402eaefc",
     "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_flags/1.2.5/MODULE.bazel": "4518a3c853815b265ad2b900335fd2bdb5104061c5bb7dc1915844036b7e54b8",
     "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_flags/1.2.5/source.json": "c451c7a99781e6c77f6547a16a719488677a24ada2089214c802b6784abc25c1",
+    "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_io/2.4.0/MODULE.bazel": "8625a2088477ace6088efb2d3f6b666389fc876b3cc22a62e9898c1d791d355b",
+    "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_io/2.4.0/source.json": "5b489228b09f829e7263a3c1e00239db861eee75ceb9fa2a2d4b8e2ed7c023bb",
     "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_logging/1.5.11/MODULE.bazel": "a86ece71c2c1beb39656111e260f7b166797d97c3cec2d0d20a58821451f0394",
     "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_logging/1.5.11/source.json": "481bda124276884f21acafd86d5d80dbe9fa5a49aaee7cbeb6cd2869c53c372a",
     "https://raw.githubusercontent.com/dejwk/roo-registry/main/modules/roo_testing/2.3.0/MODULE.bazel": "41bfd3fcb67b7b294ed30cd3f6505b5215adf0af0c612951de39c2d5dae61b68",

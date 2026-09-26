@@ -93,8 +93,8 @@ Until roo_pb is published, the consuming root module can use sibling checkouts:
 ```starlark
 bazel_dep(name = "roo_pb", version = "0.1.0")
 local_path_override(module_name = "roo_pb", path = "../roo_pb")
-local_path_override(module_name = "roo_io", path = "../roo_io")
 ```
 
-Root-module overrides do not propagate from dependency modules. The local
-roo_io override selects the binary primitives currently required by roo_pb.
+Root-module overrides do not propagate from dependency modules. The published
+roo_io 2.4.0 dependency provides the primitives required by roo_pb; no local
+roo_io override is needed.
