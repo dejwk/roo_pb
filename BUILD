@@ -13,8 +13,11 @@ cc_library(
 
 filegroup(
     name = "compiler_sources",
+    visibility = ["//visibility:public"],
     srcs = glob(["compiler/roo_pbc/*.py"]),
 )
+
+exports_files(["tools/generate.py"])
 
 # The independent compiler requires host Python >= 3.11, with no pip packages.
 genrule(
