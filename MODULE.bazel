@@ -4,6 +4,3 @@ bazel_dep(name = "rules_cc", version = "0.2.25")
 bazel_dep(name = "platforms", version = "1.1.0")
 bazel_dep(name = "roo_io", version = "2.4.0")
 bazel_dep(name = "roo_testing", version = "2.3.0", dev_dependency = True)
-
-# Checked binary primitives phases 1-6 are currently available locally only.
-local_path_override(module_name = "roo_io", path = "../roo_io")
