@@ -1,0 +1,5 @@
+syntax = "proto3";
+package bazel_test;
+import "base.proto";
+import "mid.proto";
+message Consumer { Base base = 1; Mid mid = 2; }

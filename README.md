@@ -113,6 +113,23 @@ Supported features and limitations:
 - [Telemetry example](examples/telemetry/main.cpp)
 - [Callback and extensions example](examples/callbacks/README.md)
 
+## Bazel code generation
+
+```starlark
+load("@roo_pb//:defs.bzl", "roo_pb_library")
+
+roo_pb_library(
+    name = "messages",
+    srcs = ["device.proto"],
+    options = ["device.roo_pb.toml"],
+)
+```
+
+Add `:messages` to a C++ target's `deps` and include `"device.pb.h"`. The rule
+supplies generated headers and the runtime, supports imported schemas through
+`deps`, and rebuilds when schemas, sidecars, or compiler sources change.
+See [Bazel protobuf libraries](docs/bazel.md) for paths, imports, and local setup.
+
 ## Build and test
 
 For neighboring roo repositories under one directory:

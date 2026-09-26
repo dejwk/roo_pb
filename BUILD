@@ -1,11 +1,12 @@
 load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_cc//cc:cc_test.bzl", "cc_test")
+load(":defs.bzl", "roo_pb_library")
 
 cc_library(
     name = "roo_pb",
-    hdrs = glob(["src/**/*.h"]),
     srcs = glob(["src/**/*.cpp"]),
+    hdrs = glob(["src/**/*.h"]),
     includes = ["src"],
     visibility = ["//visibility:public"],
     deps = ["@roo_io"],
@@ -13,41 +14,55 @@ cc_library(
 
 filegroup(
     name = "compiler_sources",
-    visibility = ["//visibility:public"],
     srcs = glob(["compiler/roo_pbc/*.py"]),
+    visibility = ["//visibility:public"],
 )
 
-exports_files(["tools/generate.py"])
+exports_files([
+    "defs.bzl",
+    "tools/generate.py",
+])
 
-# The independent compiler requires host Python >= 3.11, with no pip packages.
-genrule(
+roo_pb_library(
     name = "telemetry_codegen",
-    srcs = glob(["examples/telemetry/*.proto", "examples/telemetry/*.toml"]),
-    outs = ["generated/telemetry.pb.h"],
-    cmd = "python3 $(location tools/generate.py) -I examples/telemetry --out $(RULEDIR)/generated telemetry.proto",
-    tools = ["tools/generate.py", ":compiler_sources"],
+    srcs = ["examples/telemetry/telemetry.proto"],
+    options = ["examples/telemetry/telemetry.roo_pb.toml"],
+    strip_import_prefix = "examples/telemetry",
 )
 
-genrule(
+roo_pb_library(
     name = "semantics_codegen",
-    srcs = glob(["tests/schemas/*.proto", "tests/schemas/*.toml"]),
-    outs = ["generated/modern.pb.h", "generated/semantics.pb.h"],
-    cmd = "python3 $(location tools/generate.py) -I tests/schemas --out $(RULEDIR)/generated modern.proto",
-    tools = ["tools/generate.py", ":compiler_sources"],
+    srcs = ["tests/schemas/semantics.proto"],
+    options = ["tests/schemas/semantics.roo_pb.toml"],
+    strip_import_prefix = "tests/schemas",
 )
 
-cc_library(
+roo_pb_library(
+    name = "modern_codegen",
+    srcs = ["tests/schemas/modern.proto"],
+    options = ["tests/schemas/modern.roo_pb.toml"],
+    strip_import_prefix = "tests/schemas",
+    deps = [":semantics_codegen"],
+)
+
+roo_pb_library(
     name = "test_messages",
-    hdrs = [":telemetry_codegen", ":semantics_codegen"],
-    includes = ["generated"],
-    deps = [":roo_pb"],
+    deps = [
+        ":modern_codegen",
+        ":telemetry_codegen",
+    ],
 )
 
 [
     cc_test(
         name = name,
         srcs = ["tests/" + name + ".cpp"],
-        copts = ["-std=c++17", "-fno-exceptions", "-fno-rtti", "-UNDEBUG"],
+        copts = [
+            "-std=c++17",
+            "-fno-exceptions",
+            "-fno-rtti",
+            "-UNDEBUG",
+        ],
         deps = [":test_messages"],
     )
     for name in [
@@ -64,40 +79,53 @@ cc_library(
 
 cc_binary(
     name = "telemetry_example",
-    target_compatible_with = select({"@roo_testing//roo_testing/platforms:is_arduino": ["@platforms//:incompatible"], "//conditions:default": []}),
-    srcs = ["examples/telemetry/main.cpp", "examples/telemetry/telemetry.pb.h"],
-    copts = ["-std=c++17", "-fno-exceptions", "-fno-rtti"],
+    srcs = [
+        "examples/telemetry/main.cpp",
+        "examples/telemetry/telemetry.pb.h",
+    ],
+    copts = [
+        "-std=c++17",
+        "-fno-exceptions",
+        "-fno-rtti",
+    ],
+    target_compatible_with = select({
+        "@roo_testing//roo_testing/platforms:is_arduino": ["@platforms//:incompatible"],
+        "//conditions:default": [],
+    }),
     deps = [":test_messages"],
 )
 
-genrule(
-    name = "callbacks_codegen",
-    srcs = glob(["examples/callbacks/*.proto", "examples/callbacks/*.toml"]),
-    outs = ["generated/transfer.pb.h"],
-    cmd = "python3 $(location tools/generate.py) -I examples/callbacks --out $(RULEDIR)/generated transfer.proto",
-    tools = ["tools/generate.py", ":compiler_sources"],
-)
-
-cc_library(
+roo_pb_library(
     name = "callbacks_messages",
-    hdrs = [":callbacks_codegen"],
-    includes = ["generated"],
-    deps = [":roo_pb"],
+    srcs = ["examples/callbacks/transfer.proto"],
+    options = ["examples/callbacks/transfer.roo_pb.toml"],
+    strip_import_prefix = "examples/callbacks",
 )
 
 cc_binary(
     name = "callbacks_example",
     srcs = ["examples/callbacks/main.cpp"],
-    copts = ["-std=c++17", "-fno-exceptions", "-fno-rtti"],
+    copts = [
+        "-std=c++17",
+        "-fno-exceptions",
+        "-fno-rtti",
+    ],
     deps = [":callbacks_messages"],
 )
 
 cc_library(
     name = "arduino_example_compile",
     srcs = [":arduino_example_source"],
-    copts = [ "-std=c++17", "-fno-exceptions", "-fno-rtti"],
+    copts = [
+        "-std=c++17",
+        "-fno-exceptions",
+        "-fno-rtti",
+    ],
     target_compatible_with = ["@roo_testing//roo_testing/platforms:arduino"],
-    deps = [":test_messages", "@roo_testing//:arduino"],
+    deps = [
+        ":test_messages",
+        "@roo_testing//:arduino",
+    ],
 )
 
 genrule(

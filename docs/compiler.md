@@ -11,6 +11,9 @@ clang-format -i build/generated/telemetry.pb.h
 
 Include `telemetry.pb.h` in your C++ application and add `src` and the output
 folder to include paths. The compiler emits the entire imported schema graph.
+Pass `--direct-only` to emit only explicitly named schemas while still loading
+and validating their imports. Bazel uses this mode to keep imported headers in
+their owning library targets; see [Bazel integration](bazel.md).
 Use `--depfile output.d` for a Make-style dependency file including sidecars.
 Output is deterministic for identical sources and options. Generation validates
 the complete graph before writing files. Diagnostics identify schema locations

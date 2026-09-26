@@ -12,15 +12,17 @@ def main():
     parser.add_argument('-I', '--proto-path', action='append', default=[])
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--depfile', type=Path)
+    parser.add_argument('--direct-only', action='store_true',
+                        help='emit only explicitly named schemas, while validating all imports')
     args = parser.parse_args()
     try:
         schema = Schema(args.proto_path or ['.'])
-        for name in args.schemas:
-            schema.load(name)
+        direct = [schema.load(name) for name in args.schemas]
         schema.validate()
-        # Validate generation for the complete graph before writing any files.
+        # Generate all requested headers before writing any files.
+        generated_sources = direct if args.direct_only else schema.sources.values()
         outputs = {source.logical[:-6] + '.pb.h': generate(schema, source)
-                   for source in schema.sources.values()}
+                   for source in generated_sources}
         for name, contents in outputs.items():
             path = args.out / name
             path.parent.mkdir(parents=True, exist_ok=True)

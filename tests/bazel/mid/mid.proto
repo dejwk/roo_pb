@@ -1,0 +1,4 @@
+syntax = "proto3";
+package bazel_test;
+import "base.proto";
+message Mid { Base base = 1; }

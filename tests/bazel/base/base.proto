@@ -1,0 +1,3 @@
+syntax = "proto3";
+package bazel_test;
+message Base { string name = 1; }

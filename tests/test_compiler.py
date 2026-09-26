@@ -25,6 +25,27 @@ class CompilerTest(unittest.TestCase):
             self.assertIn('::roo_pb::BoundedString<17>', output)
             self.assertIn(str(sidecar), depfile.read_text())
 
+    # Verifies Bazel can emit direct headers without redeclaring imported outputs.
+    def test_cli_direct_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'base.proto').write_text('message Base { optional string name=1; }')
+            sidecar = root / 'base.roo_pb.toml'
+            sidecar.write_text('[fields."Base.name"]\nmax_bytes=19\n')
+            (root / 'child.proto').write_text(
+                'import "base.proto"; message Child { optional Base base=1; }')
+            output = root / 'generated'
+            depfile = root / 'deps.d'
+            subprocess.run([sys.executable, '-m', 'roo_pbc', '-I', str(root),
+                            '--direct-only', '--out', str(output),
+                            '--depfile', str(depfile), 'child.proto'],
+                           check=True, capture_output=True, text=True)
+            self.assertTrue((output / 'child.pb.h').exists())
+            self.assertFalse((output / 'base.pb.h').exists())
+            self.assertIn('#include "base.pb.h"', (output / 'child.pb.h').read_text())
+            self.assertIn(str(sidecar), depfile.read_text())
+            self.assertIn(str(root / 'base.proto'), depfile.read_text())
+
     def compile(self, text, options='', files=None):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

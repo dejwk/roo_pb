@@ -1,0 +1,3 @@
+syntax = "proto3";
+package bazel_test;
+message Other { uint32 id = 1; }
