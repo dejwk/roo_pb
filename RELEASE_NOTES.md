@@ -1,3 +1,11 @@
+# roo_pb 0.1.1
+
+- Upgrade `roo_io` to 2.4.1 in Bazel and require 2.4.1 or newer in PlatformIO.
+- Upgrade the Bazel development dependency `roo_testing` to 2.3.1.
+- Update Bazel setup documentation and library descriptions to reflect published modules and remove obsolete local-checkout requirements.
+
+---
+
 # roo_pb 0.1.0
 
 MIT-licensed C++17 protocol buffers with a standalone Python compiler and
