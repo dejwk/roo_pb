@@ -135,9 +135,10 @@ int main() {
   device.add_readings(-1);
   device.set_online(true);
   unsigned char buffer[example::Device::kMaxEncodedSize];
-  assert(device.SerializeToArray(buffer, sizeof(buffer)));
+  size_t written = 0;
+  assert(device.SerializeToArray(buffer, sizeof(buffer), written));
   example::Device copy;
-  assert(copy.ParseFromArray(buffer, device.ByteSizeLong()));
+  assert(copy.ParseFromArray(buffer, written));
   assert(allocations == before);
   std::printf("Device sizeof=%zu max_wire=%zu; bounded path allocations=0\n",
               sizeof(device), example::Device::kMaxEncodedSize);

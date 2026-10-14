@@ -45,9 +45,10 @@ void Scalars() {
   original.set_flag(true);
   original.set_payload("a\0b", 3);
   unsigned char bytes[256];
-  assert(original.SerializeToArray(bytes, sizeof(bytes)));
+  size_t written = 0;
+  assert(original.SerializeToArray(bytes, sizeof(bytes), written));
   test::Scalars copy;
-  assert(copy.ParseFromArray(bytes, original.ByteSizeLong()));
+  assert(copy.ParseFromArray(bytes, written));
   assert(copy.i32() == INT32_MIN && copy.i64() == INT64_MIN);
   assert(copy.u32() == UINT32_MAX && copy.u64() == UINT64_MAX);
   assert(copy.s32() == INT32_MIN && copy.s64() == INT64_MIN);
@@ -71,9 +72,10 @@ void Collections() {
   message.set_dynamic("allocated");
   message.add_big(UINT64_MAX);
   unsigned char output[256];
-  assert(message.SerializeToArray(output, sizeof(output)));
+  size_t written = 0;
+  assert(message.SerializeToArray(output, sizeof(output), written));
   test::Modern copy;
-  assert(copy.ParseFromArray(output, message.ByteSizeLong()));
+  assert(copy.ParseFromArray(output, written));
   assert(copy.big(0) == UINT64_MAX);
   assert(std::strcmp(copy.dynamic().data(), "allocated") == 0);
   message.set_note("other");
@@ -132,7 +134,7 @@ void CallbacksAndUnknowns() {
   message.set_stream_decoder({&state, DecodeStream});
   unsigned char bytes[256];
   size_t size = message.ByteSizeLong();
-  assert(message.SerializeToArray(bytes, sizeof(bytes)));
+  assert(message.SerializeToArray(bytes, sizeof(bytes), size));
   assert(state.encoded == 2);
   assert(message.ParseFromArray(bytes, size));
   assert(state.decoded == 100);
@@ -143,7 +145,7 @@ void CallbacksAndUnknowns() {
   const unsigned char extended[] = {0xa0, 6, 42};
   assert(legacy.ParseFromArray(extended, sizeof(extended)));
   assert(unknown.size() == 3);
-  assert(legacy.SerializeToArray(bytes, sizeof(bytes)));
+  assert(legacy.SerializeToArray(bytes, sizeof(bytes), size));
   assert(legacy.ByteSizeLong() == 3 && std::memcmp(bytes, extended, 3) == 0);
   test::ExtraExtension extra;
   roo_pb::ExtensionBinding binding = extra.binding();
@@ -153,7 +155,7 @@ void CallbacksAndUnknowns() {
   assert(legacy.ParseFromArray(extended, sizeof(extended)));
   assert(extra.has_value() && extra.value() == 42);
   *extra.mutable_value() = 99;
-  assert(legacy.SerializeToArray(bytes, sizeof(bytes)));
+  assert(legacy.SerializeToArray(bytes, sizeof(bytes), size));
   assert(bytes[2] == 99);
   test::ExtraLabelExtension label;
   assert(!label.has_value() &&

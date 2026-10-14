@@ -96,17 +96,20 @@ void BufferResults() {
   Output output(suffix, sizeof(suffix));
   assert(roo_pb::Serialize(message, output) == Status::kOk);
   size_t written = 0;
-  assert(roo_pb::Serialize(message, start, sizeof(start), written) ==
-         Status::kOk);
+  assert(message.SerializeToArray(start, sizeof(start), written));
   assert(written == output.size() && written == message.ByteSizeLong());
   assert(std::memcmp(start, output.data(), written) == 0);
   example::Device decoded;
   assert(roo_pb::Parse(output.data(), output.size(), decoded) == Status::kOk);
   assert(decoded.readings(0) == -3 && decoded.readings(1) == 1000);
+  written = 123;
+  assert(!message.SerializeToArray(start, 1, written) && written == 0);
   example::Device empty;
-  assert(empty.SerializeToArray(nullptr, 0) &&
+  written = 123;
+  assert(empty.SerializeToArray(nullptr, 0, written) && written == 0 &&
          empty.ParseFromArray(nullptr, 0));
-  assert(!empty.SerializeToArray(nullptr, 1) &&
+  written = 123;
+  assert(!empty.SerializeToArray(nullptr, 1, written) && written == 0 &&
          !empty.ParseFromArray(nullptr, 1));
   test::Required required;
   written = 123;
@@ -347,8 +350,7 @@ void NestedCallbacks() {
   message.add_children()->set_payload_encoder({&states[2], EncodePayload});
   unsigned char bytes[32];
   size_t written = 0;
-  assert(roo_pb::Serialize(message, bytes, sizeof(bytes), written) ==
-         Status::kOk);
+  assert(message.SerializeToArray(bytes, sizeof(bytes), written));
   const unsigned char golden[] = {10, 3, 10, 1, 7,  18, 3, 10,
                                   1,  8, 18, 3, 10, 1,  9};
   assert(written == sizeof(golden) && std::memcmp(bytes, golden, written) == 0);

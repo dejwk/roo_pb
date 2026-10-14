@@ -21,11 +21,11 @@ int RoundTrip() {
     return 2;
   }
   bytes.resize(message.ByteSizeLong());
-  if (!message.SerializeToArray(bytes.data(), bytes.size())) {
+  size_t written = 0;
+  if (!message.SerializeToArray(bytes.data(), bytes.size(), written)) {
     return 3;
   }
-  return std::fwrite(bytes.data(), 1, bytes.size(), stdout) == bytes.size() ? 0
-                                                                            : 4;
+  return std::fwrite(bytes.data(), 1, written, stdout) == written ? 0 : 4;
 }
 
 }  // namespace

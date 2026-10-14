@@ -16,8 +16,8 @@ int main() {
   assert(!device.has_reason());
   assert(device.has_online());
   unsigned char bytes[256];
-  size_t size = device.ByteSizeLong();
-  assert(device.SerializeToArray(bytes, sizeof(bytes)));
+  size_t size = 0;
+  assert(device.SerializeToArray(bytes, sizeof(bytes), size));
   example::Device copy;
   assert(copy.ParseFromArray(bytes, size));
   assert(copy.id() == 42);

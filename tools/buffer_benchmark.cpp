@@ -60,8 +60,8 @@ int main() {
   message.add_readings(12345);
   message.set_online(true);
   unsigned char bytes[example::Device::kMaxEncodedSize];
-  size_t size = message.ByteSizeLong();
-  if (!message.SerializeToArray(bytes, sizeof(bytes))) {
+  size_t size = 0;
+  if (!message.SerializeToArray(bytes, sizeof(bytes), size)) {
     return 1;
   }
   Clock::time_point start = Clock::now();
@@ -76,7 +76,7 @@ int main() {
   start = Clock::now();
   for (size_t i = 0; i < kIterations; ++i) {
     message.set_id(static_cast<uint32_t>(128 + i % 128));
-    if (!message.SerializeToArray(bytes, sizeof(bytes))) {
+    if (!message.SerializeToArray(bytes, sizeof(bytes), size)) {
       return 3;
     }
     checksum += bytes[1];

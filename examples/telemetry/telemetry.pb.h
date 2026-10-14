@@ -22,9 +22,7 @@ class Device {
 
   /// Copies values and bindings; self-assignment leaves the message unchanged.
   Device& operator=(const Device& other) {
-    if (this == &other) {
-      return *this;
-    }
+    if (this == &other) return *this;
     id_ = other.id_;
     name_ = other.name_;
     has_name_ = other.has_name_;
@@ -50,9 +48,7 @@ class Device {
 
   /// Moves values and bindings; self-assignment leaves the message unchanged.
   Device& operator=(Device&& other) noexcept {
-    if (this == &other) {
-      return *this;
-    }
+    if (this == &other) return *this;
     id_ = std::move(other.id_);
     name_ = std::move(other.name_);
     has_name_ = other.has_name_;
@@ -120,9 +116,7 @@ class Device {
   /// Assigns bytes without changing the field on capacity failure.
   bool try_set_name(const char* value, size_t size) {
     ::roo_pb::BoundedString<32> temporary;
-    if (!temporary.assign(value, size)) {
-      return false;
-    }
+    if (!temporary.assign(value, size)) return false;
     has_name_ = true;
     name_ = std::move(temporary);
     return true;
@@ -200,9 +194,7 @@ class Device {
 
   /// Returns the current field value or its schema default.
   const bool& online() const {
-    if (has_online()) {
-      return online_;
-    }
+    if (has_online()) return online_;
     static const bool default_value{false};
     return default_value;
   }
@@ -222,16 +214,12 @@ class Device {
 
   /// Restores the schema default and clears presence or repeated contents.
   void clear_online() {
-    if (has_online()) {
-      clear_state();
-    }
+    if (has_online()) clear_state();
   }
 
   /// Returns the current field value or its schema default.
   const ::roo_pb::BoundedString<64>& reason() const {
-    if (has_reason()) {
-      return reason_;
-    }
+    if (has_reason()) return reason_;
     static const ::roo_pb::BoundedString<64> default_value{};
     return default_value;
   }
@@ -242,9 +230,7 @@ class Device {
   /// Assigns bytes without changing the field on capacity failure.
   bool try_set_reason(const char* value, size_t size) {
     ::roo_pb::BoundedString<64> temporary;
-    if (!temporary.assign(value, size)) {
-      return false;
-    }
+    if (!temporary.assign(value, size)) return false;
     if (state_case_ != 5) {
       clear_state();
       ::new (static_cast<void*>(&reason_))::roo_pb::BoundedString<64>{};
@@ -281,9 +267,7 @@ class Device {
 
   /// Restores the schema default and clears presence or repeated contents.
   void clear_reason() {
-    if (has_reason()) {
-      clear_state();
-    }
+    if (has_reason()) clear_state();
   }
 
   /// Restores schema defaults; callback bindings and external state survive.
@@ -301,9 +285,7 @@ class Device {
   ::roo_pb::Status mergeFrom(::roo_pb::Input& input) {
     while (input.status() == ::roo_pb::Status::kOk && input.remaining() != 0) {
       uint32_t tag = 0;
-      if (input.tag(tag) != ::roo_pb::Status::kOk) {
-        return input.status();
-      }
+      if (input.tag(tag) != ::roo_pb::Status::kOk) return input.status();
       switch (tag >> 3) {
         case 1: {
           if (::roo_pb::GetWireType(tag) !=
@@ -313,9 +295,7 @@ class Device {
           }
           uint32_t item{};
           ::roo_pb::ReadValue<::roo_pb::Kind::kUint32>(input, item);
-          if (input.status() != ::roo_pb::Status::kOk) {
-            return input.status();
-          }
+          if (input.status() != ::roo_pb::Status::kOk) return input.status();
           set_id(item);
           break;
         }
@@ -326,9 +306,7 @@ class Device {
             break;
           }
           ::roo_pb::ReadValue<::roo_pb::Kind::kString>(input, name_);
-          if (input.status() != ::roo_pb::Status::kOk) {
-            return input.status();
-          }
+          if (input.status() != ::roo_pb::Status::kOk) return input.status();
           has_name_ = true;
           break;
         }
@@ -336,21 +314,18 @@ class Device {
           if (::roo_pb::GetWireType(tag) ==
               ::roo_pb::WireType::kLengthDelimited) {
             size_t length = 0;
-            if (input.length(length) != ::roo_pb::Status::kOk) {
+            if (input.length(length) != ::roo_pb::Status::kOk)
               return input.status();
-            }
             auto packed = input.child(length);
             while (packed.status() == ::roo_pb::Status::kOk &&
                    packed.remaining() != 0) {
               int32_t item{};
               ::roo_pb::ReadValue<::roo_pb::Kind::kSint32>(packed, item);
-              if (packed.status() != ::roo_pb::Status::kOk) {
+              if (packed.status() != ::roo_pb::Status::kOk)
                 return packed.status();
-              }
               int32_t* added = readings_.add();
-              if (added == nullptr) {
+              if (added == nullptr)
                 return packed.fail(::roo_pb::Status::kCapacity);
-              }
               *added = std::move(item);
             }
           } else {
@@ -361,13 +336,10 @@ class Device {
             }
             int32_t item{};
             ::roo_pb::ReadValue<::roo_pb::Kind::kSint32>(input, item);
-            if (input.status() != ::roo_pb::Status::kOk) {
-              return input.status();
-            }
+            if (input.status() != ::roo_pb::Status::kOk) return input.status();
             int32_t* added = readings_.add();
-            if (added == nullptr) {
+            if (added == nullptr)
               return input.fail(::roo_pb::Status::kCapacity);
-            }
             *added = std::move(item);
           }
           break;
@@ -380,9 +352,7 @@ class Device {
           }
           bool item{};
           ::roo_pb::ReadValue<::roo_pb::Kind::kBool>(input, item);
-          if (input.status() != ::roo_pb::Status::kOk) {
-            return input.status();
-          }
+          if (input.status() != ::roo_pb::Status::kOk) return input.status();
           set_online(item);
           break;
         }
@@ -394,9 +364,7 @@ class Device {
           }
           ::roo_pb::BoundedString<64> item{};
           ::roo_pb::ReadValue<::roo_pb::Kind::kString>(input, item);
-          if (input.status() != ::roo_pb::Status::kOk) {
-            return input.status();
-          }
+          if (input.status() != ::roo_pb::Status::kOk) return input.status();
           *mutable_reason() = std::move(item);
           break;
         }
@@ -410,35 +378,20 @@ class Device {
 
   /// Encodes resident contents; callers validate required fields separately.
   ::roo_pb::Status serialize(::roo_pb::Output& output) const {
-    if (output.status() != ::roo_pb::Status::kOk) {
-      return output.status();
-    }
-    if (has_reason()) {
+    if (output.status() != ::roo_pb::Status::kOk) return output.status();
+    if (has_reason())
       ::roo_pb::WriteField<::roo_pb::Kind::kString>(output, 5, reason_);
-    }
-    if (output.status() != ::roo_pb::Status::kOk) {
-      return output.status();
-    }
-    if (has_online()) {
+    if (output.status() != ::roo_pb::Status::kOk) return output.status();
+    if (has_online())
       ::roo_pb::WriteField<::roo_pb::Kind::kBool>(output, 4, online_);
-    }
-    if (output.status() != ::roo_pb::Status::kOk) {
-      return output.status();
-    }
+    if (output.status() != ::roo_pb::Status::kOk) return output.status();
     ::roo_pb::WriteRepeated<::roo_pb::Kind::kSint32>(output, 3, readings_,
                                                      true);
-    if (output.status() != ::roo_pb::Status::kOk) {
-      return output.status();
-    }
-    if (has_name()) {
+    if (output.status() != ::roo_pb::Status::kOk) return output.status();
+    if (has_name())
       ::roo_pb::WriteField<::roo_pb::Kind::kString>(output, 2, name_);
-    }
-    if (output.status() != ::roo_pb::Status::kOk) {
-      return output.status();
-    }
-    if (id_ != 0) {
-      ::roo_pb::WriteField<::roo_pb::Kind::kUint32>(output, 1, id_);
-    }
+    if (output.status() != ::roo_pb::Status::kOk) return output.status();
+    if (id_ != 0) ::roo_pb::WriteField<::roo_pb::Kind::kUint32>(output, 1, id_);
     return output.status();
   }
 
@@ -454,9 +407,9 @@ class Device {
     return ::roo_pb::Parse(data, size, *this) == ::roo_pb::Status::kOk;
   }
 
-  /// Writes at the buffer start; failure can leave modified bytes.
-  bool SerializeToArray(void* data, size_t capacity) const {
-    size_t written = 0;
+  /// Writes at the buffer start and sets written to the encoded length; failure
+  /// sets written to zero and can leave modified bytes.
+  bool SerializeToArray(void* data, size_t capacity, size_t& written) const {
     return ::roo_pb::Serialize(*this, data, capacity, written) ==
            ::roo_pb::Status::kOk;
   }

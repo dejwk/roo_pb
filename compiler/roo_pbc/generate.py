@@ -500,9 +500,9 @@ def emit_message(e, owner):
     e.method('Parses and replaces contents; false indicates a protocol/resource error.',
              'bool ParseFromArray(const void* data, size_t size)',
              ['return ::roo_pb::Parse(data, size, *this) == ::roo_pb::Status::kOk;'])
-    e.method('Writes at the buffer start; failure can leave modified bytes.',
-             'bool SerializeToArray(void* data, size_t capacity) const',
-             ['size_t written = 0;', 'return ::roo_pb::Serialize(*this, data, capacity, written) == ::roo_pb::Status::kOk;'])
+    e.method('Writes at the buffer start and sets written to the encoded length; failure sets written to zero and can leave modified bytes.',
+             'bool SerializeToArray(void* data, size_t capacity, size_t& written) const',
+             ['return ::roo_pb::Serialize(*this, data, capacity, written) == ::roo_pb::Status::kOk;'])
     e.method('Computes encoded size; SIZE_MAX indicates callback or encoding failure.',
              'size_t ByteSizeLong() const',
              ['::roo_pb::Output output;', 'return serialize(output) == ::roo_pb::Status::kOk ? output.size() : SIZE_MAX;'])
