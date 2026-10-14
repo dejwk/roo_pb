@@ -1,5 +1,10 @@
 # roo_pb 0.2.0
 
+- Add a standalone nanopb inline annotation bridge for bounded sizes, integer
+  widths, fixed-size constraints and explicit static/callback storage. Supports
+  file/message defaults, aggregate syntax and final TOML overrides; unsupported
+  options are errors. See [compatibility details](docs/nanopb.md).
+
 - **Breaking API change:** Bounded and dynamic strings now store length-delimited
   bytes without a trailing NUL. Replace `c_str()` with `view()` and use
   length-aware consumers. `data()` remains available but is not NUL-terminated.

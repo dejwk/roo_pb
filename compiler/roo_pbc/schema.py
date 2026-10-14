@@ -7,6 +7,7 @@ import tomllib
 
 SCALARS = {'double', 'float', 'int32', 'int64', 'uint32', 'uint64', 'sint32',
            'sint64', 'fixed32', 'fixed64', 'sfixed32', 'sfixed64', 'bool', 'string', 'bytes'}
+NANOPB_OPTIONS = {'(nanopb)', '(nanopb_fileopt)', '(nanopb_msgopt)', '(nanopb_enumopt)'}
 TOKEN = re.compile(r'''\s+|//[^\n]*|/\*[\s\S]*?\*/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[A-Za-z_][A-Za-z_0-9]*|(?:0[xX][0-9a-fA-F]+|(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?)|[{}\[\]();=<>.,:+-]''')
 
 
@@ -50,6 +51,7 @@ class Message:
     extensions: list = field(default_factory=list)
     retain_unknown: bool = False
     source: object = None
+    options: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -61,6 +63,7 @@ class Source:
     imports: list = field(default_factory=list)
     definitions: list = field(default_factory=list)
     extends: list = field(default_factory=list)
+    options: dict = field(default_factory=dict)
 
 
 def integer(text):
@@ -198,25 +201,46 @@ class Parser:
 
     def option(self):
         if self.accept('('):
-            name = '(' + self.qualified() + ')'
+            name = '(' + self.qualified().lstrip('.') + ')'
             self.expect(')')
             if self.accept('.'):
                 name += '.' + self.qualified()
         else:
             name = self.qualified()
         self.expect('=')
-        if self.peek() == '{':
-            self.error('aggregate custom options are unsupported; use a TOML sidecar')
+        if self.peek() in ('{', '<'):
+            if name not in NANOPB_OPTIONS:
+                self.error('aggregate custom options are unsupported; use a TOML sidecar')
+            end = '}' if self.take() == '{' else '>'
+            values = {}
+            while not self.accept(end):
+                key = self.name()
+                self.expect(':')
+                if key in values:
+                    self.error('duplicate nanopb option ' + key)
+                values[key] = self.value()
+                if not self.accept(','):
+                    self.accept(';')
+            return name, values
         return name, self.value()
+
+    def store_option(self, result):
+        """Flatten supported aggregates so dotted and aggregate duplicates agree."""
+        key, value = self.option()
+        entries = {key + '.' + k: v for k, v in value.items()} if isinstance(value, dict) else {key: value}
+        # Keep an empty aggregate visible for import and scope validation.
+        if not entries:
+            entries[key] = {}
+        for key, value in entries.items():
+            if key in result:
+                self.error('duplicate option ' + key)
+            result[key] = value
 
     def options(self):
         result = {}
         if self.accept('['):
             while True:
-                key, value = self.option()
-                if key in result:
-                    self.error('duplicate option ' + key)
-                result[key] = value
+                self.store_option(result)
                 if not self.accept(','):
                     break
             self.expect(']')
@@ -283,8 +307,7 @@ class Parser:
             if self.accept(';'):
                 continue
             if self.accept('option'):
-                key, value = self.option()
-                result.options[key] = value
+                self.store_option(result.options)
                 self.expect(';')
             elif self.accept('reserved'):
                 numbers, names = self.ranges()
@@ -294,7 +317,9 @@ class Parser:
                 name = self.name()
                 self.expect('=')
                 value = self.value()
-                self.options()
+                value_options = self.options()
+                if any(name.partition('.')[0] in NANOPB_OPTIONS for name in value_options):
+                    self.error('nanopb options on enum values are unsupported')
                 self.expect(';')
                 result.values.append((name, integer(value)))
         return result
@@ -329,7 +354,7 @@ class Parser:
             elif self.accept('extend'):
                 self.extend(result.full)
             elif self.accept('option'):
-                self.option()
+                self.store_option(result.options)
                 self.expect(';')
             else:
                 result.fields.append(self.parse_field(result))
@@ -376,7 +401,7 @@ class Parser:
             elif self.accept('extend'):
                 self.extend(self.source.package)
             elif self.accept('option'):
-                self.option()
+                self.store_option(self.source.options)
                 self.expect(';')
             else:
                 self.error('unsupported declaration ' + self.peek())
@@ -415,7 +440,8 @@ class Schema:
         self.sources[logical] = None
         source = Parser(path, logical).parse()
         for imported, _ in source.imports:
-            self.load(imported)
+            if imported != 'nanopb.proto':
+                self.load(imported)
         self.sources[logical] = source
         sidecar = path.with_suffix('.roo_pb.toml')
         if sidecar.exists():
@@ -459,7 +485,7 @@ class Schema:
         if 'default' in value.options and (owner.source.syntax != 'proto2' or value.label == 'repeated' or value.oneof):
             raise SchemaError(full + ': default requires a singular proto2 field')
         value.resolved = self.resolve(value.type, owner.full)
-        value.storage = dict(self.options.get(full, {}))
+        value.storage = dict(self.effective_options.get(full, {}))
         valid = {'storage', 'max_bytes', 'max_count', 'fixed_length', 'fixed_count', 'integer_bits'}
         if set(value.storage) - valid:
             raise SchemaError(full + ': unknown storage option')
@@ -500,6 +526,8 @@ class Schema:
             raise SchemaError(full + ': packed requires repeated scalar or enum')
 
     def validate(self):
+        from .nanopb import storage_options
+        self.effective_options = storage_options(self)
         used = set()
         # Reject name collisions introduced by C++ flattening and accessor APIs.
         from .generate import cpp_name, ident, camel
@@ -519,7 +547,7 @@ class Schema:
                     names = {n, n + '_', 'set_' + n, 'clear_' + n, 'has_' + n,
                              'has_' + n + '_', 'mutable_' + n, 'try_set_' + n,
                              'add_' + n, 'try_add_' + n, n + '_size'}
-                    if self.options.get(definition.full + '.' + value.name, {}).get('storage') == 'callback':
+                    if self.effective_options.get(definition.full + '.' + value.name, {}).get('storage') == 'callback':
                         names |= {n + '_encoder', n + '_decoder',
                                   n + '_encoder_', n + '_decoder_',
                                   'set_' + n + '_encoder', 'set_' + n + '_decoder'}
@@ -535,7 +563,7 @@ class Schema:
         def visible(source):
             result = {source.logical}
             def add(name):
-                if name in result:
+                if name in result or name == 'nanopb.proto':
                     return
                 result.add(name)
                 for dependency, mode in self.sources[name].imports:

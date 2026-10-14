@@ -49,9 +49,10 @@ unchecked generated convenience mutations use release-active preconditions.
 
 Proto2/3 messages, nested declarations, imports, enums, oneofs, repeated and map
 fields are supported. Editions, service generation and declared groups are
-rejected. Unknown wire groups can be skipped. Custom aggregate options are
-rejected; use the sidecar for roo options. Reflection and Google descriptor APIs
-are not generated. Storage changes alter the C++ type layout, not wire tags.
+rejected. Unknown wire groups can be skipped. A
+[nanopb annotation subset](nanopb.md) supports inline storage options, including
+aggregates. Other custom aggregate options are rejected; use the
+sidecar for roo options. Reflection and Google descriptor APIs are not generated. Storage changes alter the C++ type layout, not wire tags.
 
 Capacity and fixed-size options apply to bounded storage; combining them with
 callback/dynamic storage is rejected. Explicit message-level `unknown_fields`

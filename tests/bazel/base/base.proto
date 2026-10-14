@@ -1,3 +1,4 @@
 syntax = "proto3";
 package bazel_test;
-message Base { string name = 1; }
+import "nanopb.proto";
+message Base { string name = 1 [(nanopb).max_length = 3]; }

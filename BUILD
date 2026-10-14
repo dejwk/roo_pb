@@ -46,9 +46,16 @@ roo_pb_library(
 )
 
 roo_pb_library(
+    name = "nanopb_codegen",
+    srcs = ["tests/schemas/nanopb_compat.proto"],
+    strip_import_prefix = "tests/schemas",
+)
+
+roo_pb_library(
     name = "test_messages",
     deps = [
         ":modern_codegen",
+        ":nanopb_codegen",
         ":telemetry_codegen",
     ],
 )
@@ -69,6 +76,7 @@ roo_pb_library(
         "wire_test",
         "buffer_test",
         "storage_test",
+        "nanopb_compat_test",
         "generated_test",
         "oneof_test",
         "semantics_test",

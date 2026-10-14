@@ -17,7 +17,7 @@ def main():
     build.mkdir(exist_ok=True)
     env = dict(os.environ, PYTHONPATH=str(root / 'compiler'))
     subprocess.run([sys.executable, '-m', 'roo_pbc', '-I', str(root / 'examples/telemetry'), '--out', str(build), 'telemetry.proto'], env=env, check=True)
-    subprocess.run([sys.executable, '-m', 'roo_pbc', '-I', str(root / 'tests/schemas'), '--out', str(build), 'modern.proto'], env=env, check=True)
+    subprocess.run([sys.executable, '-m', 'roo_pbc', '-I', str(root / 'tests/schemas'), '--out', str(build), 'modern.proto', 'nanopb_compat.proto'], env=env, check=True)
     subprocess.run([sys.executable, '-m', 'roo_pbc', '-I', str(root / 'examples/callbacks'), '--out', str(build), 'transfer.proto'], env=env, check=True)
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(root / 'tests'), '-p', 'test_*.py'], env=env, check=True)
     for header in build.rglob('*.pb.h'):

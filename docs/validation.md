@@ -124,3 +124,10 @@ application callbacks. Floating-point support requires IEEE754 representations.
 Nothrow dynamic growth reports failure; deep copies of dynamic fields have a
 release-active success precondition. Buffer errors can leave modified bytes;
 applications control error recovery and callback side effects.
+
+Nanopb compatibility is checked by `tests/test_nanopb.py` (syntax, defaults,
+TOML precedence, diagnostics, imports and depfiles) and `nanopb_compat_test`
+(generated C++ capacity boundaries, narrowing, fixed sizes and callbacks).
+The Bazel consumer fixture also combines an annotation import with a TOML
+override across transitive schema dependencies. These tests require no nanopb
+installation; see the [supported annotation subset](nanopb.md).

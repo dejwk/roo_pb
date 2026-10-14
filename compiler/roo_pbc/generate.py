@@ -546,7 +546,8 @@ def generate(schema, source):
     if source.extends:
         e.line('#include "roo_pb/extension.h"')
     for imported, _ in source.imports:
-        e.line('#include ' + json.dumps(imported[:-6] + '.pb.h'))
+        if imported != 'nanopb.proto':
+            e.line('#include ' + json.dumps(imported[:-6] + '.pb.h'))
     e.line()
     if source.package:
         e.line('namespace ' + '::'.join(ident(p) for p in source.package.split('.')) + ' {\n')

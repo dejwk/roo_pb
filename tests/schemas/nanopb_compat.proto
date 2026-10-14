@@ -1,0 +1,23 @@
+syntax = "proto3";
+package nanopb_test;
+import "nanopb.proto";
+
+option (nanopb_fileopt).max_size = 5;
+option (nanopb_fileopt).type = FT_STATIC;
+
+message Sample {
+  option (nanopb_msgopt).max_count = 2;
+  string name = 1;
+  bytes blob = 2;
+  repeated sint32 readings = 3 [(nanopb).int_size = IS_8];
+  string label = 4 [(nanopb).max_length = 5];
+}
+
+message Fixed {
+  bytes token = 1 [(nanopb) = {max_size: 3 fixed_length: true}];
+  repeated uint32 pair = 2 [(nanopb) = {max_count: 2 fixed_count: true}];
+}
+
+message Node {
+  Node child = 1 [(nanopb).type = FT_CALLBACK];
+}

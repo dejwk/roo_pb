@@ -96,3 +96,7 @@ bazel_dep(name = "roo_pb", version = "0.1.0")
 
 The published roo_io 2.4.0 dependency provides the required binary primitives.
 No local overrides are needed.
+
+Schemas using the [nanopb annotation bridge](nanopb.md) can import
+`nanopb.proto` without listing it in `srcs` or adding a nanopb dependency.
+The compiler treats it as a built-in annotation import and emits no header for it.
