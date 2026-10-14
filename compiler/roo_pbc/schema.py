@@ -539,7 +539,7 @@ class Schema:
             emitted_names.add(emitted)
             if isinstance(definition, Message):
                 api = {'Clear', 'IsInitialized', 'ParseFromArray', 'SerializeToArray',
-                       'ByteSizeLong', 'mergeFrom', 'serialize',
+                       'ByteSizeLong', 'DebugString', 'debugTo', 'mergeFrom', 'serialize',
                        'set_unknown_fields_encoder', 'set_unknown_fields_decoder',
                        'unknown_fields_encoder_', 'unknown_fields_decoder_', definition.name}
                 for value in definition.fields:

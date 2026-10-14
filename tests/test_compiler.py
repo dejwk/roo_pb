@@ -127,7 +127,7 @@ class CompilerTest(unittest.TestCase):
         self.assertIn('kExtraFieldNumber = 100', output)
 
     def test_cpp_name_collisions(self):
-        for field_name in ['Clear', 'unknown_fields_encoder', 'unknown_fields_decoder', 'IsInitialized']:
+        for field_name in ['Clear', 'unknown_fields_encoder', 'unknown_fields_decoder', 'IsInitialized', 'DebugString', 'debugTo']:
             with self.subTest(name=field_name), self.assertRaisesRegex(SchemaError, 'collision'):
                 self.compile(f'syntax="proto3"; message M {{ int32 {field_name}=1; }}')
         with self.assertRaisesRegex(SchemaError, 'collision'):

@@ -76,6 +76,7 @@ roo_pb_library(
         "wire_test",
         "buffer_test",
         "storage_test",
+        "debug_test",
         "nanopb_compat_test",
         "generated_test",
         "oneof_test",

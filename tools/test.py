@@ -35,7 +35,7 @@ def main():
     sources = sorted((root / 'tests').glob('*_test.cpp')) + [root / 'tests/oracle_driver.cpp'] + sorted((root / 'examples').glob('*/main.cpp'))
     for source in sources:
         exe = build / (source.parent.name + '_example' if source.name == 'main.cpp' else source.stem)
-        subprocess.run(['g++', *flags, *includes, str(source), str(root / 'src/roo_pb/wire.cpp'), str(args.roo_root / 'roo_io/src/roo_io/text/unicode.cpp'), '-o', str(exe)], check=True)
+        subprocess.run(['g++', *flags, *includes, str(source), str(root / 'src/roo_pb/wire.cpp'), str(root / 'src/roo_pb/debug.cpp'), str(args.roo_root / 'roo_io/src/roo_io/text/unicode.cpp'), '-o', str(exe)], check=True)
         if source.stem != 'oracle_driver':
             subprocess.run([str(exe)], check=True)
         print('PASS', source.name, flush=True)

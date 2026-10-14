@@ -10,8 +10,9 @@ An optional external Google Python package is used only for interoperability tes
 
 Requires Python 3.11+, a C++17 compiler, and roo_io with its dependencies.
 The runtime uses `roo_io/data/zigzag.h` and `roo_io/text/unicode.h`.
-MODULE.bazel selects the published roo_io 2.4.0 release. Direct C++ builds must
-compile/link `src/roo_pb/wire.cpp` and `roo_io/text/unicode.cpp`.
+MODULE.bazel selects roo_io 2.4.1 and roo_logging 1.5.11. Direct C++ builds must
+compile/link `src/roo_pb/wire.cpp`, `src/roo_pb/debug.cpp`, and
+`roo_io/text/unicode.cpp`.
 
 Generate a schema without installing any Python packages:
 
@@ -71,6 +72,20 @@ Encoders prepend payload, length and
 tag in that order, and visit repeated occurrences in reverse order. Transport
 and framing are the application's responsibility. See the [design](docs/design.md)
 and [semantics](docs/semantics.md) for ownership and error contracts.
+
+## Diagnostics
+
+Generated messages provide `message.DebugString()` and
+`message.DebugString(roo_pb::DebugOptions)` for bounded, single-line diagnostics:
+
+```cpp
+LOG(INFO) << "Received: " << received.DebugString();
+// Device { id: 42, name: "kitchen", readings: [-12], online: true }
+```
+
+The method returns an owning `std::string`. It shares one output buffer across
+nested messages and never invokes callbacks. See [diagnostic formatting](docs/debug.md)
+for limits, formatting rules, and allocation behavior.
 
 ## Features and scope
 
