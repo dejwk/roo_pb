@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <type_traits>
 
 namespace {
 
@@ -39,6 +40,29 @@ void StringReads() {
   assert(text.view().empty());
 }
 
+// Returns its borrowed argument to exercise implicit function-argument
+// conversion.
+roo::string_view Borrow(roo::string_view value) { return value; }
+
+// Verifies both storage types implicitly expose their complete bytes without
+// copying.
+template <typename String>
+void ImplicitView() {
+  static_assert(std::is_convertible<const String&, roo::string_view>::value);
+  static_assert(!std::is_convertible<const String&, const char*>::value);
+  String text;
+  assert(Borrow(text).empty());
+  assert(text.assign("a\0b", 3));
+  const String& source = text;
+  roo::string_view view = source;
+  assert(view.data() == source.data());
+  assert(view == roo::string_view("a\0b", 3));
+  assert(Borrow(source) == view);
+  roo_pb::BoundedString<3> copy;
+  assert(copy.assign(source));
+  assert(copy.view() == view);
+}
+
 // Verifies string byte optimizations do not change general element resets.
 void ArrayResets() {
   roo_pb::BoundedArray<roo_pb::DynamicString, 2> owned;
@@ -60,6 +84,8 @@ int main() {
   StringReads<roo_pb::BoundedString<8>>();
   StringReads<roo_pb::DynamicString>();
   ArrayResets();
+  ImplicitView<roo_pb::BoundedString<3>>();
+  ImplicitView<roo_pb::DynamicString>();
   // Verifies the bounded buffer has no extra terminator slot.
   static_assert(sizeof(roo_pb::BoundedString<8>) ==
                 sizeof(roo_pb::BoundedArray<char, 8>));

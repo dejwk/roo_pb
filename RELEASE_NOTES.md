@@ -1,5 +1,8 @@
 # roo_pb 0.2.0
 
+- Add implicit `roo::string_view` conversion for bounded and dynamic strings.
+  Conversion borrows the payload without allocation and preserves embedded NULs.
+
 - Add a standalone nanopb inline annotation bridge for bounded sizes, integer
   widths, fixed-size constraints and explicit static/callback storage. Supports
   file/message defaults, aggregate syntax and final TOML overrides; unsupported

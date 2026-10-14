@@ -3,6 +3,9 @@
 `BoundedString<N>` retains at most N payload bytes, without a NUL terminator.
 Its object footprint also includes a length counter and alignment padding.
 `view()` returns a borrowed `roo::string_view`, valid until mutation or destruction;
+Both bounded and dynamic strings implicitly convert to `roo::string_view` with
+the same borrowing lifetime. Keep `view()` when template deduction or overload
+selection requires an explicit view.
 `data()` and `size()` expose the same length-delimited bytes. There is no `c_str()`.
 `BoundedArray<T,N>` stores N elements inline, including inactive capacity.
 `assign`, `push_back`, `add`, and `resize` report capacity failure. String lengths

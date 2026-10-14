@@ -290,6 +290,10 @@ class BasicString {
   /// destruction.
   roo::string_view view() const { return roo::string_view(data(), size()); }
 
+  /// Borrows the stored bytes when a string view is expected.
+  /// The view remains valid until mutation or destruction of this string.
+  operator roo::string_view() const { return view(); }
+
   /// Assigns @p count bytes, retaining the previous value on capacity failure.
   bool assign(const char* source, size_t count) {
     if ((source == nullptr && count != 0) || count == SIZE_MAX) {

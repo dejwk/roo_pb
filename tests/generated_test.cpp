@@ -35,7 +35,13 @@ int main() {
   assert(copy.name().view() == roo::string_view(full, sizeof(full)));
   assert(!copy.try_set_name(
       roo::string_view("012345678901234567890123456789012", 33)));
-  assert(copy.name().view() == device.name().view());
+  assert(copy.name() == device.name());
+  // Verifies generated setters accept implicit views and preserve aliased
+  // input.
+  device.set_reason(copy.name());
+  assert(device.reason().view() == copy.name().view());
+  device.set_reason(device.reason());
+  assert(device.reason().view() == copy.name().view());
   device.set_reason(roo::string_view("a\0b", 3));
   device.set_reason(device.reason().view().substr(1));
   assert(device.reason().view() == roo::string_view("\0b", 2));
