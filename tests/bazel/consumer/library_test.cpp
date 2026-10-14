@@ -19,8 +19,8 @@ int main() {
          roo_pb::Status::kOk);
   bazel_test::Consumer parsed;
   assert(parsed.ParseFromArray(buffer, size));
-  assert(std::strcmp(parsed.base().name().c_str(), "1234567") == 0);
-  assert(std::strcmp(parsed.mid().base().name().c_str(), "nested") == 0);
+  assert(parsed.base().name().view() == "1234567");
+  assert(parsed.mid().base().name().view() == "nested");
   bazel_test::Other other;
   other.set_id(42);
   assert(other.id() == 42);

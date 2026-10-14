@@ -1,6 +1,6 @@
 {
     "name": "roo_pb",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "Lightweight C++17 protocol buffers for byte buffers with roo_io utilities with independent Python generation",
     "license": "MIT",
     "keywords": [
@@ -19,6 +19,7 @@
         ]
     },
     "dependencies": {
+        "dejwk/roo_backport": ">=1.2.4",
         "dejwk/roo_io": ">=2.4.1"
     }
 }

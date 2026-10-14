@@ -1,3 +1,16 @@
+# roo_pb 0.2.0
+
+- **Breaking API change:** Bounded and dynamic strings now store length-delimited
+  bytes without a trailing NUL. Replace `c_str()` with `view()` and use
+  length-aware consumers. `data()` remains available but is not NUL-terminated.
+- Add `roo::string_view` assignment and generated field setter overloads.
+  Views borrow message storage until mutation or destruction.
+- `BoundedString<N>` and `max_bytes = N` still allow N payload bytes. Wire
+  encoding and capacity limits are unchanged; rebuild consumers for the new
+  object layouts. String and bytes fields both lose the terminator overhead.
+
+---
+
 # roo_pb 0.1.1
 
 - Upgrade `roo_io` to 2.4.1 in Bazel and require 2.4.1 or newer in PlatformIO.

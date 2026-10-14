@@ -79,13 +79,14 @@ submessage to supply different required fields.
 
 ## Storage and presence
 
-Bounded strings retain a byte length and a trailing NUL; embedded NUL bytes are
-preserved. Repeated storage tracks live size separately from capacity. Dynamic
-string and repeated storage uses explicit nothrow allocation. Recursive resident
+Bounded strings retain a byte length without a trailing NUL; embedded NUL bytes
+are preserved. Borrowed string views expose the complete payload. Repeated storage
+tracks live size separately from capacity. Dynamic string and repeated storage
+uses explicit nothrow allocation. Recursive resident
 ownership is rejected; recursive schema edges use callbacks.
 
-String/byte storage writes the complete replacement contents and terminator
-before publishing their length; discarded bytes are not erased. This avoids
+String/byte storage writes the complete replacement contents before
+publishing their length; discarded bytes are not erased. This avoids
 resetting bytes that will immediately be overwritten, without changing general
 array element initialization or resource release. Ordinary singular string/bytes
 fields read into resident storage after input validation and reuse dynamic

@@ -1,9 +1,12 @@
 # Field storage
 
-`BoundedString<N>` retains at most N bytes plus a convenience NUL terminator.
+`BoundedString<N>` retains at most N payload bytes, without a NUL terminator.
+Its object footprint also includes a length counter and alignment padding.
+`view()` returns a borrowed `roo::string_view`, valid until mutation or destruction;
+`data()` and `size()` expose the same length-delimited bytes. There is no `c_str()`.
 `BoundedArray<T,N>` stores N elements inline, including inactive capacity.
 `assign`, `push_back`, `add`, and `resize` report capacity failure. String lengths
-are byte counts, preserve embedded NULs, and do not count the terminator.
+are byte counts, preserve embedded NULs, and have no terminator overhead.
 
 `DynamicString` and `DynamicArray<T>` allocate explicitly with nothrow new.
 Checked growth reports allocation failure; ordinary C++ copying enforces success

@@ -5,6 +5,7 @@
 #include <new>
 #include <utility>
 
+#include "roo_backport/string_view.h"
 #include "roo_pb/wire.h"
 
 namespace roo_pb {
@@ -270,23 +271,24 @@ class DynamicArray {
   size_t capacity_ = 0;
 };
 
-/// Owns bytes with an explicit length and a trailing NUL for string use.
+/// Owns bytes with an explicit length, without a trailing NUL.
 /// Storage is BoundedArray<char, N> or DynamicArray<char>. Discarded bytes
 /// are not erased; clearing retains capacity without resetting byte contents.
 template <typename Storage>
 class BasicString {
  public:
-  /// Returns byte length, excluding the trailing NUL.
-  size_t size() const { return data_.size() == 0 ? 0 : data_.size() - 1; }
+  /// Returns the number of stored bytes.
+  size_t size() const { return data_.size(); }
 
   /// Returns whether the byte sequence is empty.
   bool empty() const { return size() == 0; }
 
-  /// Returns bytes valid until the next mutation.
+  /// Returns bytes valid until the next mutation; they are not NUL-terminated.
   const char* data() const { return data_.empty() ? "" : data_.data(); }
 
-  /// Returns a NUL-terminated view; embedded NUL bytes are preserved.
-  const char* c_str() const { return data(); }
+  /// Borrows the stored bytes, including embedded NULs, until mutation or
+  /// destruction.
+  roo::string_view view() const { return roo::string_view(data(), size()); }
 
   /// Assigns @p count bytes, retaining the previous value on capacity failure.
   bool assign(const char* source, size_t count) {
@@ -304,7 +306,7 @@ class BasicString {
     if (offset != SIZE_MAX && count > data_.size() - offset) {
       return false;
     }
-    if (!data_.reserve(count + 1)) {
+    if (!data_.reserve(count)) {
       return false;
     }
     if (offset != SIZE_MAX) {
@@ -318,9 +320,13 @@ class BasicString {
       }
     }
     // Byte storage needs no element reset: every newly live byte is written.
-    data_.data()[count] = '\0';
-    data_.size_ = count + 1;
+    data_.size_ = count;
     return true;
+  }
+
+  /// Copies a view, retaining the previous value on capacity failure.
+  bool assign(roo::string_view value) {
+    return assign(value.data(), value.size());
   }
 
   /// Assigns a NUL-terminated string; nullptr is rejected.
@@ -367,9 +373,10 @@ class BasicString {
   Storage data_;
 };
 
-/// Bounded byte/string storage; N excludes the convenience terminator.
+/// Bounded byte/string storage for N payload bytes, with separate length
+/// metadata.
 template <size_t N>
-using BoundedString = BasicString<BoundedArray<char, N + 1>>;
+using BoundedString = BasicString<BoundedArray<char, N>>;
 
 /// Explicit dynamically allocated byte/string storage.
 using DynamicString = BasicString<DynamicArray<char>>;

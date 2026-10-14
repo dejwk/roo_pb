@@ -24,8 +24,9 @@ int main() {
   if (roo_pb::Parse(buffer, size, received) != roo_pb::Status::kOk) {
     return 3;
   }
-  std::printf("id=%u name=%s reading=%d bytes=%zu\n", received.id(),
-              received.name().c_str(), received.readings(0), size);
+  std::printf("id=%u name=%.*s reading=%d bytes=%zu\n", received.id(),
+              static_cast<int>(received.name().size()), received.name().data(),
+              received.readings(0), size);
   return 0;
 }
 

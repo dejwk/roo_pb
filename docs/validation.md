@@ -38,8 +38,8 @@ Coverage includes:
   default restoration and preservation of resident child callback bindings.
 - Varint word boundaries, overlong encodings, all possible tenth bytes and
   20,000 deterministic cases compared with an independent scalar decoder.
-- Resident string failure atomicity, presence, terminators, aliasing and dynamic
-  buffer reuse, plus unchanged general-array reset behavior.
+- Resident string failure atomicity, presence, embedded NULs, view assignment,
+  zero/full capacities, aliasing and dynamic buffer reuse, plus unchanged general-array reset behavior.
 - Benchmark compiler-command auditing and preprocessing guards that reject
   missing optimization and incompatible C++/exception/RTTI settings.
 - Oneof union size, shared addresses, inactive defaults, member lifetimes,

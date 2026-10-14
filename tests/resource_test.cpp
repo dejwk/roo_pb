@@ -59,7 +59,7 @@ test::ResetLeaf& MutableLeaf(T& value) {
 
 void CheckDefaults(const test::ResetLeaf& value) {
   assert(!value.has_text() && !value.has_number() && !value.has_state());
-  assert(std::strcmp(value.text().c_str(), "seed") == 0);
+  assert(value.text().view() == "seed");
   assert(value.number() == -7 && value.state() == test::State::READY);
 }
 

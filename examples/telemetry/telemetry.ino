@@ -23,8 +23,9 @@ void setup() {
     Serial.println("Decoding failed");
     return;
   }
-  Serial.printf("id=%u name=%s reading=%d bytes=%u\n", received.id(),
-                received.name().c_str(), received.readings(0),
+  Serial.printf("id=%u name=%.*s reading=%d bytes=%u\n", received.id(),
+                static_cast<int>(received.name().size()),
+                received.name().data(), received.readings(0),
                 static_cast<unsigned>(size));
 }
 

@@ -5,19 +5,20 @@
 
 namespace {
 
-// Verifies overwrite/clear retain capacity, terminators and failure atomicity.
+// Verifies overwrite/clear retain capacity, embedded NULs and failure
+// atomicity.
 template <typename String>
 void StringReads() {
   String text;
   assert(text.assign("original"));
   const char* storage = text.data();
   text.clear();
-  assert(text.empty() && text.c_str()[0] == '\0');
+  assert(text.view().empty());
   const unsigned char bytes[] = {'a', 0, 'b'};
   roo_pb::Input input(bytes, sizeof(bytes));
   assert(text.read(input, sizeof(bytes), true) == roo_pb::Status::kOk);
   assert(text.data() == storage && text.size() == 3);
-  assert(std::memcmp(text.data(), bytes, 3) == 0 && text.data()[3] == '\0');
+  assert(text.view() == roo::string_view("a\0b", 3));
   const unsigned char bad[] = {0xc0, 0x80};
   roo_pb::Input invalid(bad, sizeof(bad));
   assert(text.read(invalid, 2, true) == roo_pb::Status::kInvalidUtf8);
@@ -35,7 +36,7 @@ void StringReads() {
   assert(text.size() == 2 && text.data()[0] == 0 && text.data()[1] == 'b');
   roo_pb::Input empty(nullptr, 0);
   assert(text.read(empty, 0, true) == roo_pb::Status::kOk);
-  assert(text.empty() && text.c_str()[0] == '\0');
+  assert(text.view().empty());
 }
 
 // Verifies string byte optimizations do not change general element resets.
@@ -59,12 +60,26 @@ int main() {
   StringReads<roo_pb::BoundedString<8>>();
   StringReads<roo_pb::DynamicString>();
   ArrayResets();
+  // Verifies the bounded buffer has no extra terminator slot.
+  static_assert(sizeof(roo_pb::BoundedString<8>) ==
+                sizeof(roo_pb::BoundedArray<char, 8>));
+  roo_pb::BoundedString<0> zero;
+  assert(zero.assign(roo::string_view()));
+  assert(zero.view().empty());
+  assert(!zero.assign("x"));
+  roo_pb::BoundedString<3> exact;
+  assert(exact.assign(roo::string_view("a\0b", 3)));
+  assert(exact.view() == roo::string_view("a\0b", 3));
+  assert(!exact.assign(roo::string_view("four", 4)));
+  assert(exact.view() == roo::string_view("a\0b", 3));
+  assert(exact.assign(exact.view().substr(1)));
+  assert(exact.view() == roo::string_view("\0b", 2));
   roo_pb::BoundedString<5> text;
   assert(text.assign("hello"));
   assert(!text.assign("longer"));
   assert(text.size() == 5);
   assert(text.assign(text.data() + 2, 3));
-  assert(std::strcmp(text.c_str(), "llo") == 0);
+  assert(text.view() == "llo");
   assert(text.assign("a\0b", 3));
   assert(text.size() == 3 && text.data()[2] == 'b');
   roo_pb::BoundedArray<int, 2> values;
@@ -82,7 +97,7 @@ int main() {
   roo_pb::DynamicString large;
   assert(large.assign("abcdef"));
   assert(large.assign(large.data() + 1, 4));
-  assert(std::strcmp(large.data(), "bcde") == 0);
+  assert(large.view() == "bcde");
   roo_pb::BoundedArray<int, 0> empty;
   assert(empty.add() == nullptr);
 }

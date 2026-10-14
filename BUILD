@@ -9,7 +9,7 @@ cc_library(
     hdrs = glob(["src/**/*.h"]),
     includes = ["src"],
     visibility = ["//visibility:public"],
-    deps = ["@roo_io"],
+    deps = ["@roo_backport", "@roo_io"],
 )
 
 filegroup(

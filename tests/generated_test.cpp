@@ -22,9 +22,23 @@ int main() {
   assert(copy.ParseFromArray(bytes, size));
   assert(copy.id() == 42);
   assert(copy.has_name());
-  assert(std::strcmp(copy.name().c_str(), "kitchen") == 0);
+  assert(copy.name().view() == "kitchen");
   assert(copy.readings_size() == 2 && copy.readings(0) == -12);
   assert(copy.has_online() && !copy.online());
+  // Verifies views preserve embedded NULs at full capacity on the wire.
+  char full[32];
+  std::memset(full, 'x', sizeof(full));
+  full[1] = 0;
+  device.set_name(roo::string_view(full, sizeof(full)));
+  assert(device.SerializeToArray(bytes, sizeof(bytes), size));
+  assert(copy.ParseFromArray(bytes, size));
+  assert(copy.name().view() == roo::string_view(full, sizeof(full)));
+  assert(!copy.try_set_name(
+      roo::string_view("012345678901234567890123456789012", 33)));
+  assert(copy.name().view() == device.name().view());
+  device.set_reason(roo::string_view("a\0b", 3));
+  device.set_reason(device.reason().view().substr(1));
+  assert(device.reason().view() == roo::string_view("\0b", 2));
   copy.clear_name();
   assert(!copy.has_name());
   assert(!copy.try_set_name("this string has more than thirty two bytes"));

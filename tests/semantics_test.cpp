@@ -12,8 +12,7 @@ namespace {
 void DefaultsAndMerge() {
   test::Legacy message;
   assert(!message.has_count() && message.count() == -7);
-  assert(!message.has_label() &&
-         std::strcmp(message.label().data(), "hello") == 0);
+  assert(!message.has_label() && message.label().view() == "hello");
   const unsigned char merged[] = {0x1a, 2, 8, 1, 0x1a, 2, 16, 2};
   assert(message.ParseFromArray(merged, sizeof(merged)));
   assert(message.child().x() == 1 && message.child().y() == 2);
@@ -77,7 +76,7 @@ void Collections() {
   test::Modern copy;
   assert(copy.ParseFromArray(output, written));
   assert(copy.big(0) == UINT64_MAX);
-  assert(std::strcmp(copy.dynamic().data(), "allocated") == 0);
+  assert(copy.dynamic().view() == "allocated");
   message.set_note("other");
   assert(!message.has_child() && message.has_note());
   assert(!message.child().has_x());
@@ -158,8 +157,7 @@ void CallbacksAndUnknowns() {
   assert(legacy.SerializeToArray(bytes, sizeof(bytes), size));
   assert(bytes[2] == 99);
   test::ExtraLabelExtension label;
-  assert(!label.has_value() &&
-         std::strcmp(label.value().data(), "extension") == 0);
+  assert(!label.has_value() && label.value().view() == "extension");
   test::ExtraValuesExtension values;
   test::ExtraStateExtension enum_value;
   roo_pb::ExtensionBinding bindings[] = {label.binding(), values.binding(),

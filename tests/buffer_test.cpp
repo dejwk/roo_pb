@@ -436,12 +436,11 @@ void ResidentStringFailures() {
   value.set_name("retained");
   Input bad(invalid, sizeof(invalid));
   assert(value.mergeFrom(bad) == Status::kInvalidUtf8);
-  assert(value.has_name() &&
-         std::strcmp(value.name().c_str(), "retained") == 0);
+  assert(value.has_name() && value.name().view() == "retained");
   const unsigned char truncated[] = {18, 4, 'x'};
   Input short_input(truncated, sizeof(truncated));
   assert(value.mergeFrom(short_input) == Status::kTruncated);
-  assert(std::strcmp(value.name().c_str(), "retained") == 0);
+  assert(value.name().view() == "retained");
   unsigned char oversized[256];
   Output output(oversized, sizeof(oversized));
   char content[100];
@@ -451,7 +450,7 @@ void ResidentStringFailures() {
   output.tag(2, roo_pb::WireType::kLengthDelimited);
   Input capacity(output.data(), output.size());
   assert(value.mergeFrom(capacity) == Status::kCapacity);
-  assert(std::strcmp(value.name().c_str(), "retained") == 0);
+  assert(value.name().view() == "retained");
   test::Modern fixed;
   fixed.set_token("abcd");
   const unsigned char wrong_length[] = {74, 3, 'x', 'y', 'z'};

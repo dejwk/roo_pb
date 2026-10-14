@@ -22,17 +22,16 @@ void SharedStorage() {
   const void* large = value.mutable_large();
   value.set_large("payload");
   value.clear_small();
-  assert(value.has_large() &&
-         std::strcmp(value.large().c_str(), "payload") == 0);
+  assert(value.has_large() && value.large().view() == "payload");
   const void* small = value.mutable_small();
   assert(large == small);
   assert(value.large().empty() && value.small().empty());
   value.set_small("small");
   char oversized[257] = {};
   assert(!value.try_set_large(oversized, sizeof(oversized)));
-  assert(value.has_small() && std::strcmp(value.small().c_str(), "small") == 0);
+  assert(value.has_small() && value.small().view() == "small");
   value.set_large(value.small().data(), value.small().size());
-  assert(value.has_large() && std::strcmp(value.large().c_str(), "small") == 0);
+  assert(value.has_large() && value.large().view() == "small");
   value.clear_value();
   assert(!value.has_large() && value.large().empty());
   value.set_number(42);
@@ -141,7 +140,7 @@ void NestedOwnership() {
   collection.add_items()->set_label("second");
   test::OneofCollection copy(collection);
   collection.Clear();
-  assert(std::strcmp(copy.items(0).dynamic().c_str(), "first") == 0);
+  assert(copy.items(0).dynamic().view() == "first");
   test::OneofCollection moved(std::move(copy));
   moved.Clear();
   for (int i = 0; i != 100; ++i) {

@@ -41,7 +41,9 @@ of the map field name). Use integer_bits to narrow resident integer storage;
 decoding out-of-range values reports capacity failure.
 
 Generated accessors preserve protobuf naming. Bounded strings expose data(),
-size(), c_str(), and assign(); they are not std::string. Repeated containers
+size(), view(), and assign(); they are not std::string and are not NUL-terminated.
+String setters accept `roo::string_view` as well as pointer/length inputs and
+NUL-terminated input strings. Repeated containers
 expose size(), indexing, iteration, add(), and push_back(). Indexed access and
 unchecked generated convenience mutations use release-active preconditions.
 
