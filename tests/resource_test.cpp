@@ -142,6 +142,22 @@ int main() {
   assert(allocations == before);
   std::printf("Device sizeof=%zu max_wire=%zu; bounded path allocations=0\n",
               sizeof(device), example::Device::kMaxEncodedSize);
+  // Streaming into an embedded log buffer does not allocate.
+#if defined(ARDUINO) || defined(ESP_PLATFORM)
+  char log_buffer[64];
+  roo_logging::Stream log(log_buffer, sizeof(log_buffer));
+  before = allocations;
+  log << device.name();
+  assert(allocations == before);
+#endif
+  // DebugString owns its output; a zero byte budget performs no allocation.
+  roo_pb::DebugOptions options;
+  options.max_bytes = 0;
+  before = allocations;
+  assert(device.DebugString(options).empty());
+  assert(allocations == before);
+  const std::string debug = device.DebugString();
+  assert(debug.find("bounded") != std::string::npos);
   NestedReset<test::Reset16>(16);
   NestedReset<test::Reset8>(8);
   NestedReset<test::Reset4>(4);

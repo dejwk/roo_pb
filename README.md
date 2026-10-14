@@ -79,6 +79,7 @@ Generated messages provide `message.DebugString()` and
 `message.DebugString(roo_pb::DebugOptions)` for bounded, single-line diagnostics:
 
 ```cpp
+LOG(INFO) << "Device: " << received.name();  // Escaped, allocation-free insertion.
 LOG(INFO) << "Received: " << received.DebugString();
 // Device { id: 42, name: "kitchen", readings: [-12], online: true }
 ```

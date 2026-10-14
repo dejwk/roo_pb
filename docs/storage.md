@@ -31,3 +31,25 @@ occurrence after its tag, including the length prefix. See [semantics](semantics
 Generated `kMaxEncodedSize` conservatively bounds resident bounded messages.
 SIZE_MAX means a static bound cannot be established (dynamic/callback storage or
 unknown-field handlers). This is a wire-size bound, not sizeof(message).
+
+## Logging strings
+
+Bounded and dynamic strings support direct insertion into `roo_logging::Stream`
+and, on Linux, standard C++ output streams:
+
+```cpp
+LOG(INFO) << "Device: " << descriptor.name();
+```
+
+Insertion uses the stored length and emits unquoted text. Embedded NULs and
+ASCII control bytes are escaped, as are quotes and backslashes, so a string
+cannot introduce extra log lines. It creates no temporary string. Insertion uses the public `roo_logging.h`
+stream interface; backend selection and buffer truncation belong to roo_logging.
+A full log buffer can truncate an escape. Standard streams use the same escaping
+and obey the stream's error state. This also
+applies to standalone bytes fields, which share the string storage type;
+`message.DebugString()` uses hexadecimal formatting for schema bytes fields.
+
+Direct builds using this operator must link `src/roo_pb/debug.cpp`, which
+provides the shared escape routine. Calls to `.view()` remain available when
+raw, unescaped output is intentional.

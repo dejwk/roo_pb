@@ -9,7 +9,7 @@ cc_library(
     hdrs = glob(["src/**/*.h"]),
     includes = ["src"],
     visibility = ["//visibility:public"],
-    deps = ["@roo_backport", "@roo_io"],
+    deps = ["@roo_backport", "@roo_io", "@roo_logging"],
 )
 
 filegroup(
@@ -77,6 +77,7 @@ roo_pb_library(
         "buffer_test",
         "storage_test",
         "debug_test",
+        "string_logging_test",
         "nanopb_compat_test",
         "generated_test",
         "oneof_test",

@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "dejwk/roo_backport": ">=1.2.4",
-        "dejwk/roo_io": ">=2.4.1"
+        "dejwk/roo_io": ">=2.4.1",
+        "dejwk/roo_logging": ">=1.5.11"
     }
 }

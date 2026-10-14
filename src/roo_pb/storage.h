@@ -5,7 +5,13 @@
 #include <new>
 #include <utility>
 
+#if defined(__linux__)
+#include <ostream>
+#endif
+
 #include "roo_backport/string_view.h"
+#include "roo_logging.h"
+#include "roo_pb/debug.h"
 #include "roo_pb/wire.h"
 
 namespace roo_pb {
@@ -384,5 +390,34 @@ using BoundedString = BasicString<BoundedArray<char, N>>;
 
 /// Explicit dynamically allocated byte/string storage.
 using DynamicString = BasicString<DynamicArray<char>>;
+
+/// Streams escaped, unquoted text using its explicit length; never allocates.
+template <typename Storage>
+roo_logging::Stream& operator<<(roo_logging::Stream& stream,
+                                const BasicString<Storage>& value) {
+  for (unsigned char c : value.view()) {
+    char escaped[4];
+    const size_t size = internal::EscapeDebugByte(c, escaped);
+    stream << roo::string_view(escaped, size);
+  }
+  return stream;
+}
+
+#if defined(__linux__)
+/// Supports Linux host logging and standard streams with the same escaped text.
+template <typename Traits, typename Storage>
+std::basic_ostream<char, Traits>& operator<<(
+    std::basic_ostream<char, Traits>& stream,
+    const BasicString<Storage>& value) {
+  for (unsigned char c : value.view()) {
+    if (!stream.good()) break;
+    char escaped[4];
+    const size_t size = internal::EscapeDebugByte(c, escaped);
+    stream.write(escaped, size);
+  }
+  return stream;
+}
+
+#endif  // defined(__linux__)
 
 }  // namespace roo_pb
