@@ -9,6 +9,7 @@
 #include <ostream>
 #endif
 
+#include "roo_backport.h"
 #include "roo_backport/string_view.h"
 #include "roo_logging.h"
 #include "roo_pb/debug.h"

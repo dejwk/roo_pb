@@ -6,6 +6,7 @@
 #include <cstring>
 #include <limits>
 
+#include "roo_io.h"
 #include "roo_io/data/zigzag.h"
 #include "roo_io/text/unicode.h"
 
