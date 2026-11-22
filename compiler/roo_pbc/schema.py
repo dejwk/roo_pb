@@ -530,7 +530,8 @@ class Schema:
         self.effective_options = storage_options(self)
         used = set()
         # Reject name collisions introduced by C++ flattening and accessor APIs.
-        from .generate import cpp_name, ident, camel
+        from .generate import camel, cpp_name, ident, local_name
+        diagnostic_methods = {'DebugString', 'debugTo'}
         emitted_names = set()
         for definition in self.symbols.values():
             emitted = cpp_name(definition)
@@ -538,10 +539,17 @@ class Schema:
                 raise SchemaError(definition.full + ': generated C++ name collision')
             emitted_names.add(emitted)
             if isinstance(definition, Message):
+                class_name = local_name(definition)
+                if class_name in diagnostic_methods:
+                    raise SchemaError(f'{definition.full}: generated class name collides with member {class_name}')
+                for nested in definition.nested:
+                    alias = ident(nested.name)
+                    if alias in diagnostic_methods:
+                        raise SchemaError(f'{nested.full}: generated nested type alias collides with member {alias}')
                 api = {'Clear', 'IsInitialized', 'ParseFromArray', 'SerializeToArray',
-                       'ByteSizeLong', 'DebugString', 'debugTo', 'mergeFrom', 'serialize',
-                       'set_unknown_fields_encoder', 'set_unknown_fields_decoder',
-                       'unknown_fields_encoder_', 'unknown_fields_decoder_', definition.name}
+                       'ByteSizeLong', 'mergeFrom', 'serialize', 'set_unknown_fields_encoder',
+                       'set_unknown_fields_decoder', 'unknown_fields_encoder_',
+                       'unknown_fields_decoder_', definition.name} | diagnostic_methods
                 for value in definition.fields:
                     n = ident(value.name)
                     names = {n, n + '_', 'set_' + n, 'clear_' + n, 'has_' + n,

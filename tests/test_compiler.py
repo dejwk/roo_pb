@@ -133,6 +133,19 @@ class CompilerTest(unittest.TestCase):
         with self.assertRaisesRegex(SchemaError, 'collision'):
             self.compile('syntax="proto3"; message M { int32 a=1; int32 clear_a=2; }')
 
+    # Verifies that diagnostics cannot collide with a generated class or nested type alias.
+    def test_diagnostic_type_name_collisions(self):
+        for name in ('DebugString', 'debugTo'):
+            with self.subTest(name=name, scope='top-level'):
+                with self.assertRaisesRegex(SchemaError, rf'pkg\.{name}: generated class name collides'):
+                    self.compile(f'syntax="proto3"; package pkg; message {name} {{}}')
+            with self.subTest(name=name, scope='nested'):
+                with self.assertRaisesRegex(SchemaError, rf'Outer\.{name}: generated nested type alias collides'):
+                    self.compile(f'syntax="proto3"; message Outer {{ message {name} {{}} }}')
+
+        output = self.compile('syntax="proto3"; enum DebugString { ZERO=0; }')
+        self.assertIn('enum class DebugString', output)
+
     def test_private_transitive_import(self):
         files = {'a.proto': 'syntax="proto3"; import "b.proto"; message A {}',
                  'b.proto': 'syntax="proto3"; message B {}'}
