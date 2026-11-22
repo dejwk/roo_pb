@@ -6,4 +6,7 @@ import %workspace%/.roo_testing/bazelrc/esp32/base.bazelrc
 import %workspace%/.roo_testing/bazelrc/esp32/idf.bazelrc
 import %workspace%/.roo_testing/bazelrc/esp32/arduino.bazelrc
 
+# Link the ESP-IDF host shims statically so their heap and logging symbols resolve.
+build:roo_testing_idf_esp32 --dynamic_mode=off
+
 # Bazelisk defaults configured commands to Arduino unless a frontend is selected.
