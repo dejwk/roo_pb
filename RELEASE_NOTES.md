@@ -1,21 +1,12 @@
-# roo_pb 0.2.0
+# roo_pb 1.0.0
 
-- Add implicit `roo::string_view` conversion for bounded and dynamic strings.
-  Conversion borrows the payload without allocation and preserves embedded NULs.
-
-- Add a standalone nanopb inline annotation bridge for bounded sizes, integer
-  widths, fixed-size constraints and explicit static/callback storage. Supports
-  file/message defaults, aggregate syntax and final TOML overrides; unsupported
-  options are errors. See [compatibility details](docs/nanopb.md).
-
-- **Breaking API change:** Bounded and dynamic strings now store length-delimited
-  bytes without a trailing NUL. Replace `c_str()` with `view()` and use
-  length-aware consumers. `data()` remains available but is not NUL-terminated.
-- Add `roo::string_view` assignment and generated field setter overloads.
-  Views borrow message storage until mutation or destruction.
-- `BoundedString<N>` and `max_bytes = N` still allow N payload bytes. Wire
-  encoding and capacity limits are unchanged; rebuild consumers for the new
-  object layouts. String and bytes fields both lose the terminator overhead.
+- Bounded and dynamic strings and bytes now use length-delimited storage without a trailing NUL. Replace `c_str()` with `view()` or pass `data()` with `size()`. Bounded and dynamic strings support implicit, allocation-free conversion to `roo::string_view`, plus view assignment and generated field setters. Views preserve embedded NULs and borrow storage until mutation or destruction. `BoundedString<N>` and `max_bytes = N` still allow N payload bytes. Wire encoding stays compatible. Rebuild consumers for the new object layouts.
+- Generated `SerializeToArray(data, capacity, written)` now requires a `size_t&` output parameter. It writes at the start of the buffer and reports the encoded length on success. On failure, it sets `written` to zero and may leave modified bytes in the buffer.
+- Add standalone support for nanopb inline annotations for capacity bounds, integer widths, fixed-size constraints, and static or callback storage. The built-in `nanopb.proto` import supports dotted and aggregate syntax, file and message defaults, and final TOML overrides. Unsupported options produce compiler errors. [Nanopb compatibility details](docs/nanopb.md)
+- Add generated `DebugString()` diagnostics with configurable byte, element, and depth limits. Formatting inspects resident fields without invoking callbacks. The compiler rejects schema names that collide with generated diagnostic methods. Strings and bytes also support escaped, allocation-free insertion into `roo_logging` streams and Linux standard streams. Direct C++ builds must link `src/roo_pb/debug.cpp`. [Diagnostic formatting](docs/debug.md)
+- Derive Python package metadata from `roo_pbc.__version__` so the wheel version matches the version in generated headers.
+- Set Bazel dependencies and PlatformIO minimums to `roo_backport` 1.3.0, `roo_logging` 1.6.1, and `roo_io` 2.5.0. Update the Bazel development dependency and CI to `roo_testing` 2.7.0 and fix ESP32 host linkage.
+- Add Bazel profile definitions for ESP32-S3, ESP32-C3, and RP2040 and list all nine profiles in `test_all_profiles`. The root `.bazelrc` currently imports only the two original ESP32 profiles.
 
 ---
 
